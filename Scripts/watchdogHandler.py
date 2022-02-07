@@ -16,8 +16,9 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         print("File Created - % s." % event.src_path)
         # Event is created, you can process it now
 
-if __name__ == "__main__":
-    src_path = r"..\Computer-Aided-Quality-Data-Handling\Sample Data"
+
+def startWatchdog(source_path,output_path,completed_path):
+    src_path = source_path
     event_handler = Handler()
     observer = watchdog.observers.Observer()
     observer.schedule(event_handler, path=src_path, recursive=True)
@@ -28,3 +29,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
+
+if __name__ == "__main__":
+    startWatchdog(r"..\Computer-Aided-Quality-Data-Handling\Sample Data",r"..\Computer-Aided-Quality-Data-Handling\Output",r"..\Computer-Aided-Quality-Data-Handling\Complete")
