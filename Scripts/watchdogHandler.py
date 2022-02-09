@@ -46,4 +46,4 @@ def startWatchdog(thread_name,source_path,output_path,completed_path):
 
 if __name__ == "__main__":
     print("Starting Watchdog")
-    startWatchdog("test",r"C:\Users\Jared\Desktop\Random_School\Capstone\Computer-Aided-Quality-Data-Handling\Sample_Data",r"C:\Users\Jared\Desktop\Random_School\Capstone\Computer-Aided-Quality-Data-Handling\Output",r"C:\Users\Jared\Desktop\Random_School\Capstone\Computer-Aided-Quality-Data-Handling\Complete")
+    startWatchdog("test",r"..\Computer-Aided-Quality-Data-Handling\Sample_Data",r"..\Computer-Aided-Quality-Data-Handling\Output",r"..\Computer-Aided-Quality-Data-Handling\Complete")
