@@ -9,14 +9,15 @@ import shutil
 
 #code modified from https://www.geeksforgeeks.org/create-a-watchdog-in-python-to-look-for-filesystem-changes/
 class Handler(watchdog.events.PatternMatchingEventHandler):
-    def __init__(self,output_path,completed_path):
+    def __init__(self,thread_name,output_path,completed_path):
         # Set the patterns for PatternMatchingEventHandler
         watchdog.events.PatternMatchingEventHandler.__init__(self, patterns=['*.xml','*.dat','*.dfq','*.xls'],ignore_directories=True, case_sensitive=False)
         self.output_path=output_path
         self.completed_path=completed_path
+        self.thread_name=thread_name
   
     def on_created(self, event):
-        print("File Created - % s." % event.src_path)
+        print("%s - File Created - % s." %(self.thread_name,event.src_path))
         # Event is created, you can process it now
         print(event.src_path)
         print(self.output_path+"\\"+event.src_path.split('\\')[-1])
@@ -30,9 +31,9 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         switch.get(event.src_path[-4:],lambda:"File not appropriate data type")
 
 
-def startWatchdog(source_path,output_path,completed_path):
+def startWatchdog(thread_name,source_path,output_path,completed_path):
     src_path = source_path
-    event_handler = Handler(output_path,completed_path)
+    event_handler = Handler(thread_name,output_path,completed_path)
     observer = watchdog.observers.Observer()
     observer.schedule(event_handler, path=src_path, recursive=True)
     observer.start()
@@ -44,4 +45,5 @@ def startWatchdog(source_path,output_path,completed_path):
     observer.join()
 
 if __name__ == "__main__":
-    startWatchdog(r"..\Computer-Aided-Quality-Data-Handling\Sample Data",r"..\Computer-Aided-Quality-Data-Handling\Output",r"..\Computer-Aided-Quality-Data-Handling\Complete")
+    print("Starting Watchdog")
+    startWatchdog("test",r"C:\Users\Jared\Desktop\Random_School\Capstone\Computer-Aided-Quality-Data-Handling\Sample_Data",r"C:\Users\Jared\Desktop\Random_School\Capstone\Computer-Aided-Quality-Data-Handling\Output",r"C:\Users\Jared\Desktop\Random_School\Capstone\Computer-Aided-Quality-Data-Handling\Complete")
