@@ -15,7 +15,7 @@ class myThread (threading.Thread):
 
 
 # Create new threads
-thread1 = myThread(1, "Thread-1", r"..\Computer-Aided-Quality-Data-Handling\Sample_Data")
+thread1 = myThread(1, "Thread-1", r"..\Computer-Aided-Quality-Data-Handling\Sample Data")
 thread2 = myThread(2, "Thread-2", r"..\Computer-Aided-Quality-Data-Handling\TestPath")
 
 # Start new Threads

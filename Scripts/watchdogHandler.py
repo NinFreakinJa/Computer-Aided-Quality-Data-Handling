@@ -37,6 +37,7 @@ def startWatchdog(thread_name,source_path,output_path,completed_path):
     observer = watchdog.observers.Observer()
     observer.schedule(event_handler, path=src_path, recursive=True)
     observer.start()
+    print("Watchdog "+str(thread_name)+" started at: "+source_path)
     try:
         while True:
             time.sleep(1)
@@ -45,5 +46,4 @@ def startWatchdog(thread_name,source_path,output_path,completed_path):
     observer.join()
 
 if __name__ == "__main__":
-    print("Starting Watchdog")
-    startWatchdog("test",r"..\Computer-Aided-Quality-Data-Handling\Sample_Data",r"..\Computer-Aided-Quality-Data-Handling\Output",r"..\Computer-Aided-Quality-Data-Handling\Complete")
+    startWatchdog("test",r"..\Computer-Aided-Quality-Data-Handling\Sample Data",r"..\Computer-Aided-Quality-Data-Handling\Output",r"..\Computer-Aided-Quality-Data-Handling\Complete")
