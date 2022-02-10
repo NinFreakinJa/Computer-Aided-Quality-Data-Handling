@@ -18,12 +18,10 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
   
     def on_created(self, event):
         print("%s - File Created - % s." %(self.thread_name,event.src_path))
-        print("Processing "+event.src_path)
         # Event is created, you can process it now
         extension=event.src_path.split('.')[-1]
         if(extension=='dfq'):
-            shutil.copyfile(event.src_path,self.output_path+"\\"+event.src_path.split('\\')[-1])
-            shutil.move(event.src_path,self.completed_path+"\\"+event.src_path.split('\\')[-1])
+            processDFQ(event.src_path,self.output_path,self.completed_path)
         elif(extension=='xml'):
             print("XML Detected")
         elif(extension=="dat"):
@@ -32,7 +30,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
             print("XLS dectected")
         else:
             print("File type not supported")
-        print("Finished Processing "+event.src_path)
+        
 
 
 def startWatchdog(thread_name,source_path,output_path,completed_path):
@@ -48,6 +46,12 @@ def startWatchdog(thread_name,source_path,output_path,completed_path):
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
+
+def processDFQ(filepath,output_path,completed_path):
+    print("Processing "+filepath)
+    shutil.copyfile(filepath,output_path+"\\"+filepath.split('\\')[-1])
+    shutil.move(filepath,completed_path+"\\"+filepath.split('\\')[-1])
+    print("Finished Processing "+filepath)
 
 if __name__ == "__main__":
     startWatchdog("test",r"..\Computer-Aided-Quality-Data-Handling\Sample Data",r"..\Computer-Aided-Quality-Data-Handling\Output",r"..\Computer-Aided-Quality-Data-Handling\Complete")
