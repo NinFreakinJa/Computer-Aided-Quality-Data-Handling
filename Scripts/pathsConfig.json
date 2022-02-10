@@ -3,6 +3,6 @@
             "..\\Sample Data",
             "..\\TestPath"
         ],
-        "output_path" : "..\\Sample Data",
+        "output_path" : "..\\Output",
         "completed_path": "..\\Completed"
 }

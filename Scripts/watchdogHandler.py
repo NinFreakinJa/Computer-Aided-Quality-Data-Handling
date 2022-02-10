@@ -18,24 +18,21 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
   
     def on_created(self, event):
         print("%s - File Created - % s." %(self.thread_name,event.src_path))
+        print("Processing "+event.src_path)
         # Event is created, you can process it now
-        print(event.src_path)
-        print(self.output_path+"\\"+event.src_path.split('\\')[-1])
-        print(event.src_path[-4:])
         extension=event.src_path.split('.')[-1]
-        if(extension=='.dfq'):
-            print("Processing "+event.src_path)
-            shutil.move(event.src_path,self.output_path+"\\"+event.src_path.split('\\')[-1])
-            print("Finished Processing "event.src_path)
-        elif(extension=='.xml'):
+        if(extension=='dfq'):
+            shutil.copyfile(event.src_path,self.output_path+"\\"+event.src_path.split('\\')[-1])
+            shutil.move(event.src_path,self.completed_path+"\\"+event.src_path.split('\\')[-1])
+        elif(extension=='xml'):
             print("XML Detected")
-        switch={
-            '.dfq': lambda : shutil.move(event.src_path,self.output_path+"\\"+event.src_path.split('\\')[-1]),
-            '.dat': "dat",
-            '.xml': "xml",
-            '.xls': "xls",
-        }
-        switch.get(event.src_path[-4:],lambda:"File not appropriate data type")
+        elif(extension=="dat"):
+            print("DAT detected")
+        elif(extension=="xls"):
+            print("XLS dectected")
+        else:
+            print("File type not supported")
+        print("Finished Processing "+event.src_path)
 
 
 def startWatchdog(thread_name,source_path,output_path,completed_path):
