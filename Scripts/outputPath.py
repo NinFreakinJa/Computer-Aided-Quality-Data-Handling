@@ -2,8 +2,25 @@
 #Import OS Interface
 import os
 
-path0 = input("Specify folder location for original files:")
-path1 = input("Specify folder location for processed files:")
+src = "outputPaths.txt"
+outputPaths = []
+
+#Iterate through controller file (outputPaths.txt)
+with open(src, 'r') as file:
+    #Read Lines
+    lines = file.readlines()
+    #Strip whitespace and append to paths list
+    for i in lines:
+        j = i.strip()
+        outputPaths.append(j)
+
+
+#Close controller file
+file.close()
+
+#Set path variables
+path0 = outputPaths[0]
+path1 = outputPaths[1]
 
 #Convert to originalFiles path
 os.chdir(path0)
