@@ -1,0 +1,8 @@
+{
+        "input_paths": [
+            "..\\Sample Data",
+            "..\\TestPath"
+        ],
+        "output_path" : "..\\Sample Data",
+        "completed_path": "..\\Completed"
+}

@@ -22,6 +22,13 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         print(event.src_path)
         print(self.output_path+"\\"+event.src_path.split('\\')[-1])
         print(event.src_path[-4:])
+        extension=event.src_path.split('.')[-1]
+        if(extension=='.dfq'):
+            print("Processing "+event.src_path)
+            shutil.move(event.src_path,self.output_path+"\\"+event.src_path.split('\\')[-1])
+            print("Finished Processing "event.src_path)
+        elif(extension=='.xml'):
+            print("XML Detected")
         switch={
             '.dfq': lambda : shutil.move(event.src_path,self.output_path+"\\"+event.src_path.split('\\')[-1]),
             '.dat': "dat",
