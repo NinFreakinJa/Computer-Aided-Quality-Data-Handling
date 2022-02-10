@@ -4,7 +4,7 @@ from fileinput import close
 def getPaths():
  
     #Set controller file
-    src = "paths.txt"
+    src = "watchDogPaths.txt"
     paths = []
 
     #Iterate through controller file
@@ -16,7 +16,7 @@ def getPaths():
             j = i.strip()
             paths.append(j)
 
-            
+          
     return paths        
 
 
