@@ -1,9 +1,0 @@
-Enter file paths to watch below:
-test
-jlksajfklsdajlkfjds
-C:\User\example\test.php
-D:\Server00\excel\test.xls
-D:\Server01\excel\test.xls
-D:\Server02\excel\test.xls
-D:\Server03\excel\test.xls
-D:\Server04\excel\test.xls
