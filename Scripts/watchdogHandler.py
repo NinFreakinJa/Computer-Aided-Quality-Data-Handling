@@ -34,6 +34,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         else:
             print("File type not supported")
         
+#Checks if the appropriate file structure exists for new files in the archive and output paths
 def checkPathExists(file_path,source_path,output_path,archive_path):
     if(not os.path.exists(archive_path+"\\"+source_path.split("\\")[-1]+file_path.replace(source_path,""))):
         for root, dirs, files in os.walk(source_path):
