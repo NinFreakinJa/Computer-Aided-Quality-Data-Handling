@@ -69,6 +69,3 @@ def processDFQ(filepath,source_path,output_path,archive_path):
     shutil.copyfile(filepath,output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
     shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
     print("Finished Processing "+filepath)
-
-if __name__ == "__main__":
-    startWatchdog("test",r"..\Computer-Aided-Quality-Data-Handling\Sample Data",r"..\Computer-Aided-Quality-Data-Handling\Output",r"..\Computer-Aided-Quality-Data-Handling\Complete")
