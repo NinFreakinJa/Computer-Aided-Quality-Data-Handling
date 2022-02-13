@@ -38,8 +38,8 @@ def getPaths_JSON():
     except FileExistsError:
         print("Located Directory: "+paths["output_path"])
     try:
-        os.mkdir(paths["archive_path"])
-        print("Created Directory: "+paths["archive_path"])
+        os.mkdir(paths["completed_path"])
+        print("Created Directory: "+paths["completed_path"])
     except FileExistsError:
-        print("Located Directory: "+paths["archive_path"])
+        print("Located Directory: "+paths["completed_path"])
     return(paths)
