@@ -4,5 +4,5 @@
             "..\\TestPath"
         ],
         "output_path" : "..\\Output",
-        "archive_path": "..\\Archive"
+        "completed_path": "..\\Completed"
 }
