@@ -1,8 +1,19 @@
 {
-        "input_paths": [
-            "..\\Sample Data",
-            "..\\TestPath"
-        ],
-        "output_path" : "..\\Output",
-        "archive_path": "..\\Archive"
+    "paths": [    
+        {
+            "input_paths": [
+                "..\\Sample Data",
+                "..\\TestPath"
+            ],
+            "output_path" : "..\\Output",
+            "archive_path": "..\\Archive"
+        },
+        {
+            "input_paths": [
+                "..\\TestPath2"
+            ],
+            "output_path" : "..\\Output2",
+            "archive_path": "..\\Archive2"
+        }
+    ]
 }

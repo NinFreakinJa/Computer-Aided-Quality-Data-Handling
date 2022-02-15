@@ -7,20 +7,21 @@ def getPaths_JSON():
     paths=dict()
     with open(src, 'r') as file:
         paths=json.load(file)
-    for i in paths["input_paths"]:
+    for i in paths["paths"]:
+        for j in i["input_paths"]:
+            try:
+                os.mkdir(j)
+                print("Created Directory: "+j)
+            except FileExistsError:
+                print("Located Directory: "+j)
         try:
-            os.mkdir(i)
-            print("Created Directory: "+i)
+            os.mkdir(i["output_path"])
+            print("Created Directory: "+i["output_path"])
         except FileExistsError:
-            print("Located Directory: "+i)
-    try:
-        os.mkdir(paths["output_path"])
-        print("Created Directory: "+paths["output_path"])
-    except FileExistsError:
-        print("Located Directory: "+paths["output_path"])
-    try:
-        os.mkdir(paths["archive_path"])
-        print("Created Directory: "+paths["archive_path"])
-    except FileExistsError:
-        print("Located Directory: "+paths["archive_path"])
+            print("Located Directory: "+i["output_path"])
+        try:
+            os.mkdir(i["archive_path"])
+            print("Created Directory: "+i["archive_path"])
+        except FileExistsError:
+            print("Located Directory: "+i["archive_path"])
     return(paths)
