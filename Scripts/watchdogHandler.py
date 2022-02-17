@@ -6,7 +6,6 @@ import watchdog.events
 import watchdog.observers
 import time
 import shutil
-import os
 from getPaths import checkPathExists
 
 #code modified from https://www.geeksforgeeks.org/create-a-watchdog-in-python-to-look-for-filesystem-changes/
