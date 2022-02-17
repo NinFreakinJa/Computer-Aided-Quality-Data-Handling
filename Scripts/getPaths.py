@@ -6,7 +6,7 @@ import os
 def createFileStructure(filepath):
     structure=filepath.split("\\")
     for i in range(1,len(structure)+1):
-        if((not os.path.exists("\\".join(structure[:i]))) and structure[i-1]!=".."):
+        if((not os.path.exists("\\".join(structure[:i]))) and structure[i-1]!=".." and (not ":" in structure[i-1])):
             try:
                 os.mkdir("\\".join(structure[:i]))
                 print("Created Directory: "+"\\".join(structure[:i]))
