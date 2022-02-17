@@ -7,6 +7,7 @@ import watchdog.observers
 import time
 import shutil
 import os
+from getPaths import checkPathExists
 
 #code modified from https://www.geeksforgeeks.org/create-a-watchdog-in-python-to-look-for-filesystem-changes/
 class Handler(watchdog.events.PatternMatchingEventHandler):
@@ -33,23 +34,8 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
             print("XLS dectected")
         else:
             print("File type not supported")
-        
-def checkPathExists(file_path,source_path,output_path,archive_path):
-    if(not os.path.exists(archive_path+"\\"+source_path.split("\\")[-1]+file_path.replace(source_path,""))):
-        for root, dirs, files in os.walk(source_path):
-            try:
-                os.mkdir(archive_path+"\\"+source_path.split("\\")[-1]+root.replace(source_path,""))
-                print("Created Directory: "+archive_path+"\\"+source_path.split("\\")[-1]+root.replace(source_path,""))
-            except FileExistsError:
-                continue
-    if(not os.path.exists(output_path+"\\"+source_path.split("\\")[-1]+file_path.replace(source_path,""))):
-        for root, dirs, files in os.walk(source_path):
-            try:
-                os.mkdir(output_path+"\\"+source_path.split("\\")[-1]+root.replace(source_path,""))
-                print("Created Directory: "+output_path+"\\"+source_path.split("\\")[-1]+root.replace(source_path,""))
-            except FileExistsError:
-                continue
 
+# Initiallization for watchdog
 def startWatchdog(thread_name,source_path,output_path,archive_path):
     src_path = source_path
     event_handler = Handler(thread_name,source_path,output_path,archive_path)
@@ -64,6 +50,7 @@ def startWatchdog(thread_name,source_path,output_path,archive_path):
         observer.stop()
     observer.join()
 
+# DFQ is copied to output path and original file is moved to archive path
 def processDFQ(filepath,source_path,output_path,archive_path):
     print("Processing "+filepath)
     shutil.copyfile(filepath,output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))

@@ -2,26 +2,32 @@
 import json
 import os
 
+# Creates the structure for the inputted filepath iteratively
+def createFileStructure(filepath):
+    structure=filepath.split("\\")
+    for i in range(len(structure)):
+        if(not os.path.exists("\\".join(structure[:i]))):
+            try:
+                os.mkdir("\\".join(structure[:i]))
+                print("Created Directory: "+"\\".join(structure[:i]))
+            except:
+                print("Could not create directory: "+"\\".join(structure[:i]))
+
+# Checks that file structure exists in archive and output folders to support new file
+def checkPathExists(file_path,source_path,output_path,archive_path):
+    createFileStructure(archive_path+"\\"+source_path.split("\\")[-1]+file_path.replace(source_path,""))
+    createFileStructure(output_path+"\\"+source_path.split("\\")[-1]+file_path.replace(source_path,""))
+
+# Gets paths from the pathsConfig.json
 def getPaths_JSON():
     src="pathsConfig.json"
     paths=dict()
     with open(src, 'r') as file:
         paths=json.load(file)
+    # Structure of pathsConfig.json is an array "paths" of dictionaries with objects "ouput_path", "archive_path", and array "input_paths"
     for i in paths["paths"]:
         for j in i["input_paths"]:
-            try:
-                os.mkdir(j)
-                print("Created Directory: "+j)
-            except FileExistsError:
-                print("Located Directory: "+j)
-        try:
-            os.mkdir(i["output_path"])
-            print("Created Directory: "+i["output_path"])
-        except FileExistsError:
-            print("Located Directory: "+i["output_path"])
-        try:
-            os.mkdir(i["archive_path"])
-            print("Created Directory: "+i["archive_path"])
-        except FileExistsError:
-            print("Located Directory: "+i["archive_path"])
+            createFileStructure(j)
+        createFileStructure(i["output_path"])
+        createFileStructure(i["archive_path"])
     return(paths)
