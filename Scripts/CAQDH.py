@@ -11,7 +11,7 @@ def initial_pass(paths):
         for j in i["input_paths"]:
             for root, dirs, files in os.walk(j):
                 for name in files:
-                    getPaths.checkPathExists(os.path.join(root,name),j,i["output_path"],i["archive_path"])
+                    getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                     extension=name.split('.')[-1]
                     if(extension=='dfq'):
                         watchdogHandler.processDFQ(os.path.join(root, name),j,i["output_path"],i["archive_path"])
