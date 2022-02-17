@@ -1,0 +1,772 @@
+; ------------------------------------------------------------------------------
+; File:        \\localhost\OpconData$\ResultData\Wp140\2022\02\16\026150076720210304041750435310-3NGA0_20220216_133253.dat
+; ------------------------------------------------------------------------------
+; Date:        16 Feb 2022 - 08:32:52
+; Created by:  OpCon DatAccess V1.11.0.0
+; ------------------------------------------------------------------------------
+
+\ #Index
+  Head #Index
+    Properties
+      Label_E = "Head data"
+      Label_D = "Kopfdaten"
+    WpcId
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "work piece carrier ID"
+        Label_D = "Werkstückträger-ID"
+    PartId
+      VarType = REG_DWORD 0x8
+      Data = "026150076720210304041750435310-3NGA0"
+      Properties
+        Label_E = "part id wp140"
+        Label_D = "Teile-ID Wp140"
+    UniqueId
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "unique ID"
+        Label_D = "Unique ID"
+    Result
+      VarType = REG_DWORD 0x2
+      Data = "1"
+      Properties
+        Label_E = "test result"
+        Label_D = "Ergebnis"
+    TypeNoCur
+      VarType = REG_DWORD 0x8
+      Data = "0261500 76"
+      Properties
+        Label_E = "current type no."
+        Label_D = "Aktuelle Typnr."
+    TypeNoNew
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "new type no."
+        Label_D = "Neue Typnr."
+    TypeVarCur
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "current type variant"
+        Label_D = "Aktuelle Typvariante"
+    TypeVarNew
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "new type variant"
+        Label_D = "Neue Typvariante"
+    TypeVersionCur
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "current type version"
+        Label_D = "Aktuelle Typversion"
+    TypeVersionNew
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "new type version"
+        Label_D = "Neue Typversion"
+    BatchCur
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "current batch"
+        Label_D = "Aktuelle Charge"
+    BatchNew
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "new batch"
+        Label_D = "Neue Charge"
+    WorkingCode
+      VarType = REG_DWORD 0x2
+      Data = "0"
+    PartState
+      VarType = REG_DWORD 0x2
+      Data = "4"
+      Properties
+        Label_E = "part state"
+        Label_D = "Teilestatus"
+    NokBits
+      VarType = REG_DWORD 0x13
+      Data = "0"
+      Properties
+        Label_E = "NOK bits"
+        Label_D = "niO Bits"
+    WorkCycleCount
+      VarType = REG_DWORD 0x2
+      Data = "0"
+      Properties
+        Label_E = "work cycle count"
+        Label_D = "Bearbeitungszähler"
+    CycleTimePrev
+      VarType = REG_DWORD 0x2
+      Data = "0"
+      Properties
+        Label_E = "previous cycle time"
+        Label_D = "Vorherige Taktzeit"
+    OrderId
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "order ID"
+        Label_D = "Auftragsnr."
+    MaschineId
+      VarType = REG_DWORD 0x8
+      Data = ""
+      Properties
+        Label_E = "machine ID"
+        Label_D = "Maschinennr."
+    PartForProcess
+      VarType = REG_DWORD 0xB
+      Data = "-1"
+      Properties
+        Label_E = "part for process"
+        Label_D = "Teil für Prozess"
+    PassThrough
+      VarType = REG_DWORD 0xB
+      Data = "0"
+      Properties
+        Label_E = "let part pass through"
+        Label_D = "Teil durchschleusen"
+    ChangeOver
+      VarType = REG_DWORD 0xB
+      Data = "0"
+      Properties
+        Label_E = "change over necessary"
+        Label_D = "Umrüsten notwendig"
+    NextProcessNo
+      VarType = REG_DWORD 0x3
+      Data = "140"
+      Properties
+        Label_E = "next process number"
+        Label_D = "Nächste Prozessnr."
+    SpcTests
+      VarType = REG_DWORD 0x13
+      Data = "0"
+      Properties
+        Label_E = "SPC test(s) to be performed"
+        Label_D = "Auszuführende SPC Tests"
+  In #Index
+    Properties
+      Label_E = "Input data"
+      Label_D = "Input Daten"
+    Process #Index
+      Properties
+        Label_E = "Process data"
+        Label_D = "Prozessdaten"
+      PartId
+        VarType = REG_DWORD 0x8
+        Data = ""
+      UniqueId
+        VarType = REG_DWORD 0x8
+        Data = ""
+      OrderNo
+        VarType = REG_DWORD 0x8
+        Data = ""
+  Out #Index
+    Properties
+      Label_E = "Output data"
+      Label_D = "Output Daten"
+    Process #Index
+      Properties
+        Label_E = "Process data"
+        Label_D = "Prozessdaten"
+      PartId
+        VarType = REG_DWORD 0x8
+        Data = ""
+      UniqueId
+        VarType = REG_DWORD 0x8
+        Data = ""
+      OrderNoCur
+        VarType = REG_DWORD 0x8
+        Data = ""
+    Result #Index
+      Properties
+        Label_E = "Leakage"
+        Label_D = "Dichtheitsprüfung"
+      Muftl #Index
+        Properties
+          Label_E = "Muftl"
+          Label_D = "Muftl"
+        ClientVersion
+          VarType = REG_DWORD 0x8
+          Data = "01.26"
+          Properties
+            Label_E = "Client Version"
+            Label_D = "Client Version"
+        ComVersion
+          VarType = REG_DWORD 0x8
+          Data = "1.7.0.0"
+          Properties
+            Label_E = "Com Version"
+            Label_D = "Com Version"
+        HmiVersion
+          VarType = REG_DWORD 0x8
+          Data = "1.7.0.0"
+          Properties
+            Label_E = "Hmi Version"
+            Label_D = "Hmi Version"
+        Leakage #Index
+          Properties
+            Label_E = "Leakage"
+            Label_D = "Dichtheitsprüfung"
+          Value
+            VarType = REG_DWORD 0x4
+            Data = "0.08937805"
+            Properties
+              Label_E = "Measure value"
+              Label_D = "Messwert"
+          Result
+            VarType = REG_DWORD 0x2
+            Data = "1"
+            Properties
+              Label_E = "Check result"
+              Label_D = "Prüfergebnis"
+          LoLim
+            VarType = REG_DWORD 0x4
+            Data = "-0.02"
+            Properties
+              Label_E = "Lower limit"
+              Label_D = "Unterer Grenzwert"
+          UpLim
+            VarType = REG_DWORD 0x4
+            Data = "1.95"
+            Properties
+              Label_E = "Upper limit"
+              Label_D = "Oberer Grenzwert"
+          SetValue
+            VarType = REG_DWORD 0x4
+            Data = "0"
+            Properties
+              Label_E = "Set value"
+              Label_D = "Sollwert"
+          CheckType
+            VarType = REG_DWORD 0x2
+            Data = "5"
+            Properties
+              Label_E = "Check type"
+              Label_D = "Prüftyp"
+              SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+              SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+          Unit
+            VarType = REG_DWORD 0x8
+            Data = "mm³/min"
+            Properties
+              Label_E = "Unit of measure value"
+              Label_D = "Einheit des Messwerts"
+      Seal #Index
+        Properties
+          Label_E = "seal"
+          Label_D = "Abdichtung"
+        Top #Index
+          Properties
+            Label_E = "seal top"
+            Label_D = "Abdichtung oben"
+          Value
+            VarType = REG_DWORD 0x4
+            Data = "3.983886"
+            Properties
+              Label_E = "Measure value"
+              Label_D = "Messwert"
+          Result
+            VarType = REG_DWORD 0x2
+            Data = "1"
+            Properties
+              Label_E = "Check result"
+              Label_D = "Prüfergebnis"
+          LoLim
+            VarType = REG_DWORD 0x4
+            Data = "3.5"
+            Properties
+              Label_E = "Lower limit"
+              Label_D = "Unterer Grenzwert"
+          UpLim
+            VarType = REG_DWORD 0x4
+            Data = "4.5"
+            Properties
+              Label_E = "Upper limit"
+              Label_D = "Oberer Grenzwert"
+          SetValue
+            VarType = REG_DWORD 0x4
+            Data = "4"
+            Properties
+              Label_E = "Set value"
+              Label_D = "Sollwert"
+          CheckType
+            VarType = REG_DWORD 0x2
+            Data = "5"
+            Properties
+              Label_E = "Check type"
+              Label_D = "Prüftyp"
+              SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+              SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+          Unit
+            VarType = REG_DWORD 0x8
+            Data = "bar"
+            Properties
+              Label_E = "Unit of measure value"
+              Label_D = "Einheit des Messwerts"
+        Bottom #Index
+          Properties
+            Label_E = "seal bottom"
+            Label_D = "Abdichtung unten"
+          Value
+            VarType = REG_DWORD 0x4
+            Data = "6.087527"
+            Properties
+              Label_E = "Measure value"
+              Label_D = "Messwert"
+          Result
+            VarType = REG_DWORD 0x2
+            Data = "1"
+            Properties
+              Label_E = "Check result"
+              Label_D = "Prüfergebnis"
+          LoLim
+            VarType = REG_DWORD 0x4
+            Data = "5.5"
+            Properties
+              Label_E = "Lower limit"
+              Label_D = "Unterer Grenzwert"
+          UpLim
+            VarType = REG_DWORD 0x4
+            Data = "7"
+            Properties
+              Label_E = "Upper limit"
+              Label_D = "Oberer Grenzwert"
+          SetValue
+            VarType = REG_DWORD 0x4
+            Data = "6"
+            Properties
+              Label_E = "Set value"
+              Label_D = "Sollwert"
+          CheckType
+            VarType = REG_DWORD 0x2
+            Data = "5"
+            Properties
+              Label_E = "Check type"
+              Label_D = "Prüftyp"
+              SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+              SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+          Unit
+            VarType = REG_DWORD 0x8
+            Data = "bar"
+            Properties
+              Label_E = "Unit of measure value"
+              Label_D = "Einheit des Messwerts"
+      Medium #Index
+        Properties
+          Label_E = "medium"
+          Label_D = "Medium"
+        PressLow #Index
+          Properties
+            Label_E = "low pressure area"
+            Label_D = "Niederdruckbereich"
+          PressRinse #Index
+            Properties
+              Label_E = "pressure rinse"
+              Label_D = "Spüldruck"
+            Value
+              VarType = REG_DWORD 0x4
+              Data = "6.605731"
+              Properties
+                Label_E = "Measure value"
+                Label_D = "Messwert"
+            Result
+              VarType = REG_DWORD 0x2
+              Data = "1"
+              Properties
+                Label_E = "Check result"
+                Label_D = "Prüfergebnis"
+            LoLim
+              VarType = REG_DWORD 0x4
+              Data = "4"
+              Properties
+                Label_E = "Lower limit"
+                Label_D = "Unterer Grenzwert"
+            UpLim
+              VarType = REG_DWORD 0x4
+              Data = "8"
+              Properties
+                Label_E = "Upper limit"
+                Label_D = "Oberer Grenzwert"
+            SetValue
+              VarType = REG_DWORD 0x4
+              Data = "6"
+              Properties
+                Label_E = "Set value"
+                Label_D = "Sollwert"
+            CheckType
+              VarType = REG_DWORD 0x2
+              Data = "5"
+              Properties
+                Label_E = "Check type"
+                Label_D = "Prüftyp"
+                SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+                SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+            Unit
+              VarType = REG_DWORD 0x8
+              Data = "bar"
+              Properties
+                Label_E = "Unit of measure value"
+                Label_D = "Einheit des Messwerts"
+          PressRinseChamber #Index
+            Properties
+              Label_E = "pressure rinse chamber"
+              Label_D = "Kammerspüldruck"
+            Value
+              VarType = REG_DWORD 0x4
+              Data = "0.595111"
+              Properties
+                Label_E = "Measure value"
+                Label_D = "Messwert"
+            Result
+              VarType = REG_DWORD 0x2
+              Data = "1"
+              Properties
+                Label_E = "Check result"
+                Label_D = "Prüfergebnis"
+            LoLim
+              VarType = REG_DWORD 0x4
+              Data = "0.4"
+              Properties
+                Label_E = "Lower limit"
+                Label_D = "Unterer Grenzwert"
+            UpLim
+              VarType = REG_DWORD 0x4
+              Data = "1"
+              Properties
+                Label_E = "Upper limit"
+                Label_D = "Oberer Grenzwert"
+            SetValue
+              VarType = REG_DWORD 0x4
+              Data = "0.6"
+              Properties
+                Label_E = "Set value"
+                Label_D = "Sollwert"
+            CheckType
+              VarType = REG_DWORD 0x2
+              Data = "5"
+              Properties
+                Label_E = "Check type"
+                Label_D = "Prüftyp"
+                SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+                SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+            Unit
+              VarType = REG_DWORD 0x8
+              Data = "bar"
+              Properties
+                Label_E = "Unit of measure value"
+                Label_D = "Einheit des Messwerts"
+          FlowRinseChamber #Index
+            Properties
+              Label_E = "flow rinse chamber"
+              Label_D = "Kammerspüldurchfluß"
+            Value
+              VarType = REG_DWORD 0x4
+              Data = "37.67"
+              Properties
+                Label_E = "Measure value"
+                Label_D = "Messwert"
+            Result
+              VarType = REG_DWORD 0x2
+              Data = "1"
+              Properties
+                Label_E = "Check result"
+                Label_D = "Prüfergebnis"
+            LoLim
+              VarType = REG_DWORD 0x4
+              Data = "30"
+              Properties
+                Label_E = "Lower limit"
+                Label_D = "Unterer Grenzwert"
+            UpLim
+              VarType = REG_DWORD 0x4
+              Data = "40"
+              Properties
+                Label_E = "Upper limit"
+                Label_D = "Oberer Grenzwert"
+            SetValue
+              VarType = REG_DWORD 0x4
+              Data = "35"
+              Properties
+                Label_E = "Set value"
+                Label_D = "Sollwert"
+            CheckType
+              VarType = REG_DWORD 0x2
+              Data = "5"
+              Properties
+                Label_E = "Check type"
+                Label_D = "Prüftyp"
+                SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+                SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+            Unit
+              VarType = REG_DWORD 0x8
+              Data = "ln/h"
+              Properties
+                Label_E = "Unit of measure value"
+                Label_D = "Einheit des Messwerts"
+        PressHigh #Index
+          Properties
+            Label_E = "high pressure area"
+            Label_D = "Hochdruckbereich"
+          PressPrepare #Index
+            Properties
+              Label_E = "pressure preparation"
+              Label_D = "Druckbereitstellung"
+            PressInlet #Index
+              Properties
+                Label_E = "pressure inlet"
+                Label_D = "Eingangsdruck"
+              Value
+                VarType = REG_DWORD 0x4
+                Data = "129.53"
+                Properties
+                  Label_E = "Measure value"
+                  Label_D = "Messwert"
+              Result
+                VarType = REG_DWORD 0x2
+                Data = "1"
+                Properties
+                  Label_E = "Check result"
+                  Label_D = "Prüfergebnis"
+              LoLim
+                VarType = REG_DWORD 0x4
+                Data = "110"
+                Properties
+                  Label_E = "Lower limit"
+                  Label_D = "Unterer Grenzwert"
+              UpLim
+                VarType = REG_DWORD 0x4
+                Data = "150"
+                Properties
+                  Label_E = "Upper limit"
+                  Label_D = "Oberer Grenzwert"
+              SetValue
+                VarType = REG_DWORD 0x4
+                Data = "130"
+                Properties
+                  Label_E = "Set value"
+                  Label_D = "Sollwert"
+              CheckType
+                VarType = REG_DWORD 0x2
+                Data = "5"
+                Properties
+                  Label_E = "Check type"
+                  Label_D = "Prüftyp"
+                  SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+                  SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+              Unit
+                VarType = REG_DWORD 0x8
+                Data = "bar"
+                Properties
+                  Label_E = "Unit of measure value"
+                  Label_D = "Einheit des Messwerts"
+            PressProbePre #Index
+              Properties
+                Label_E = "pressure probe pre"
+                Label_D = "Prüfvordruck"
+              Value
+                VarType = REG_DWORD 0x4
+                Data = "8.77"
+                Properties
+                  Label_E = "Measure value"
+                  Label_D = "Messwert"
+              Result
+                VarType = REG_DWORD 0x2
+                Data = "1"
+                Properties
+                  Label_E = "Check result"
+                  Label_D = "Prüfergebnis"
+              LoLim
+                VarType = REG_DWORD 0x4
+                Data = "8"
+                Properties
+                  Label_E = "Lower limit"
+                  Label_D = "Unterer Grenzwert"
+              UpLim
+                VarType = REG_DWORD 0x4
+                Data = "12"
+                Properties
+                  Label_E = "Upper limit"
+                  Label_D = "Oberer Grenzwert"
+              SetValue
+                VarType = REG_DWORD 0x4
+                Data = "10"
+                Properties
+                  Label_E = "Set value"
+                  Label_D = "Sollwert"
+              CheckType
+                VarType = REG_DWORD 0x2
+                Data = "5"
+                Properties
+                  Label_E = "Check type"
+                  Label_D = "Prüftyp"
+                  SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+                  SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+              Unit
+                VarType = REG_DWORD 0x8
+                Data = "bar"
+                Properties
+                  Label_E = "Unit of measure value"
+                  Label_D = "Einheit des Messwerts"
+            PressProbe #Index
+              Properties
+                Label_E = "pressure probe"
+                Label_D = "Prüfdruck"
+              Value
+                VarType = REG_DWORD 0x4
+                Data = "100.02"
+                Properties
+                  Label_E = "Measure value"
+                  Label_D = "Messwert"
+              Result
+                VarType = REG_DWORD 0x2
+                Data = "1"
+                Properties
+                  Label_E = "Check result"
+                  Label_D = "Prüfergebnis"
+              LoLim
+                VarType = REG_DWORD 0x4
+                Data = "98"
+                Properties
+                  Label_E = "Lower limit"
+                  Label_D = "Unterer Grenzwert"
+              UpLim
+                VarType = REG_DWORD 0x4
+                Data = "103"
+                Properties
+                  Label_E = "Upper limit"
+                  Label_D = "Oberer Grenzwert"
+              SetValue
+                VarType = REG_DWORD 0x4
+                Data = "100"
+                Properties
+                  Label_E = "Set value"
+                  Label_D = "Sollwert"
+              CheckType
+                VarType = REG_DWORD 0x2
+                Data = "5"
+                Properties
+                  Label_E = "Check type"
+                  Label_D = "Prüftyp"
+                  SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+                  SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+              Unit
+                VarType = REG_DWORD 0x8
+                Data = "bar"
+                Properties
+                  Label_E = "Unit of measure value"
+                  Label_D = "Einheit des Messwerts"
+          PressRelease #Index
+            Properties
+              Label_E = "pressure release"
+              Label_D = "Druckfreigabe"
+            PressProbeHead #Index
+              Properties
+                Label_E = "pressure probe head"
+                Label_D = "Prüfkopfdruck"
+              Value
+                VarType = REG_DWORD 0x4
+                Data = "99.84"
+                Properties
+                  Label_E = "Measure value"
+                  Label_D = "Messwert"
+              Result
+                VarType = REG_DWORD 0x2
+                Data = "1"
+                Properties
+                  Label_E = "Check result"
+                  Label_D = "Prüfergebnis"
+              LoLim
+                VarType = REG_DWORD 0x4
+                Data = "98"
+                Properties
+                  Label_E = "Lower limit"
+                  Label_D = "Unterer Grenzwert"
+              UpLim
+                VarType = REG_DWORD 0x4
+                Data = "103"
+                Properties
+                  Label_E = "Upper limit"
+                  Label_D = "Oberer Grenzwert"
+              SetValue
+                VarType = REG_DWORD 0x4
+                Data = "100"
+                Properties
+                  Label_E = "Set value"
+                  Label_D = "Sollwert"
+              CheckType
+                VarType = REG_DWORD 0x2
+                Data = "5"
+                Properties
+                  Label_E = "Check type"
+                  Label_D = "Prüftyp"
+                  SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+                  SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+              Unit
+                VarType = REG_DWORD 0x8
+                Data = "bar"
+                Properties
+                  Label_E = "Unit of measure value"
+                  Label_D = "Einheit des Messwerts"
+      Heater #Index
+        Properties
+          Label_E = "heater"
+          Label_D = "Heizung"
+        Temperature #Index
+          Properties
+            Label_E = "Temperature"
+            Label_D = "Temperatur"
+          Value
+            VarType = REG_DWORD 0x4
+            Data = "29.92648"
+            Properties
+              Label_E = "Measure value"
+              Label_D = "Messwert"
+          Result
+            VarType = REG_DWORD 0x2
+            Data = "1"
+            Properties
+              Label_E = "Check result"
+              Label_D = "Prüfergebnis"
+          LoLim
+            VarType = REG_DWORD 0x4
+            Data = "28"
+            Properties
+              Label_E = "Lower limit"
+              Label_D = "Unterer Grenzwert"
+          UpLim
+            VarType = REG_DWORD 0x4
+            Data = "31"
+            Properties
+              Label_E = "Upper limit"
+              Label_D = "Oberer Grenzwert"
+          SetValue
+            VarType = REG_DWORD 0x4
+            Data = "30"
+            Properties
+              Label_E = "Set value"
+              Label_D = "Sollwert"
+          CheckType
+            VarType = REG_DWORD 0x2
+            Data = "5"
+            Properties
+              Label_E = "Check type"
+              Label_D = "Prüftyp"
+              SelectValues_E = "|1|Result <= upper limit|2|Result >= lower limit|3|Set value only (result without evaluation)|4|Result = set value +/- lower limit|5|Lower limit <= result <= upper limit|6|Result <= lower limit or result >= upper limit|7|Result = set value (case sensitive string)|8|Result = set value (case insensitive string)|9|Result = set value - lower limit|10|Result = set value + upper limit|11|Result = set value - lower limit (%)|12|Result = set value + upper limit (%)|13|Result = set value +/- lower limit (%)|14|Set value - lower limit <= result <= set value + upper limit"
+              SelectValues_D = "|1|Ergebnis <= oberem Grenzwert|2|Ergebnis >= unterem Grenzwert|3|Nur Sollwert (Ergebnis ohne Auswertung)|4|Ergebnis = Sollwert +/- unterem Grenzwert|5|Unterer Grenzwert <= Ergebnis <= oberem Grenzwert|6|Ergebnis <= unterem Grenzwert oder Ergebnis >= oberem Grenzwert|7|Ergebnis = Sollwert (case sensitiver String)|8|Ergebnis = Sollwert (case insensitiver String)|9|Ergebnis = Sollwert - unterem Grenzwert|10|Ergebnis = Sollwert + oberem Grenzwert|11|Ergebnis = Sollwert - unterem Grenzwert (%)|12|Ergebnis = Sollwert + oberem Grenzwert (%)|13|Ergebnis = Sollwert +/- unterem Grenzwert (%)|14|Sollwert - unterem Grenzwert <= Ergebnis <= Sollwert + oberem Grenzwert"
+          Unit
+            VarType = REG_DWORD 0x8
+            Data = "°C"
+            Properties
+              Label_E = "Unit of measure value"
+              Label_D = "Einheit des Messwerts"
+      SwVersion
+        VarType = REG_DWORD 0x8
+        Data = "V1.9.7"
