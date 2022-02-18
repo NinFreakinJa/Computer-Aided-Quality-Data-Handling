@@ -11,15 +11,18 @@ def initial_pass(paths):
         for j in i["input_paths"]:
             for root, dirs, files in os.walk(j):
                 for name in files:
-                    getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                     extension=name.split('.')[-1]
                     if(extension=='dfq'):
+                        getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                         watchdogHandler.processDFQ(os.path.join(root, name),j,i["output_path"],i["archive_path"])
                     elif(extension=='xml'):
+                        getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                         print(threading.current_thread().name,"- XML Detected: "+os.path.join(root, name))
                     elif(extension=="dat"):
+                        getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                         print(threading.current_thread().name,"- DAT detected: "+os.path.join(root, name))
                     elif(extension=="xls"):
+                        getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                         print(threading.current_thread().name,"- XLS dectected: "+os.path.join(root, name))
 
 if __name__ == "__main__":
