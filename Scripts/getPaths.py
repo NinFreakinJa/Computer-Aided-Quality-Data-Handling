@@ -1,6 +1,7 @@
 #Method to return filespaths for watchdog
 import json
 import os
+import threading
 
 # Creates the structure for the inputted filepath iteratively
 def createFileStructure(filepath):
@@ -9,9 +10,9 @@ def createFileStructure(filepath):
         if((not os.path.exists("\\".join(structure[:i]))) and structure[i-1]!=".." and (not ":" in structure[i-1])):
             try:
                 os.mkdir("\\".join(structure[:i]))
-                print("Created Directory: "+"\\".join(structure[:i]))
+                print(threading.current_thread().name,"- Created Directory: "+"\\".join(structure[:i]))
             except:
-                print("Could not create directory: "+"\\".join(structure[:i]))
+                print(threading.current_thread().name,"- Could not create directory: "+"\\".join(structure[:i]))
 
 # Checks that file structure exists in archive and output folders to support new file
 def checkPathExists(file_path,source_path,output_path,archive_path):

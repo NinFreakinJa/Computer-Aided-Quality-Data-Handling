@@ -16,21 +16,19 @@ def initial_pass(paths):
                     if(extension=='dfq'):
                         watchdogHandler.processDFQ(os.path.join(root, name),j,i["output_path"],i["archive_path"])
                     elif(extension=='xml'):
-                        print("XML Detected: "+os.path.join(root, name))
+                        print(threading.current_thread().name,"- XML Detected: "+os.path.join(root, name))
                     elif(extension=="dat"):
-                        print("DAT detected: "+os.path.join(root, name))
+                        print(threading.current_thread().name,"- DAT detected: "+os.path.join(root, name))
                     elif(extension=="xls"):
-                        print("XLS dectected: "+os.path.join(root, name))
+                        print(threading.current_thread().name,"- XLS dectected: "+os.path.join(root, name))
 
 if __name__ == "__main__":
     paths=getPaths.getPaths_JSON()
     threads=[]
-    threadcount=0
     # Starts a watchdog at each input folder
     for i in paths["paths"]:
         for j in range(len(i["input_paths"])):
-            threads.append(threading.Thread(target=watchdogHandler.startWatchdog,args=(threadcount,i["input_paths"][j],i["output_path"],i["archive_path"])))
-            threadcount+=1
+            threads.append(threading.Thread(target=watchdogHandler.startWatchdog,args=(i["input_paths"][j],i["output_path"],i["archive_path"])))
     for i in threads:
         i.start()
     initial_pass(paths)
