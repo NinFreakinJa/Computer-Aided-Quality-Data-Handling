@@ -33,6 +33,13 @@ def read_file(filename):
                 read=True
     return complete
 
+def print_dict(input,indent):
+    for i in input:
+        print((" "*indent)+i)
+        if(type(input[i])==dict):
+            print_dict(input[i],indent+1)
+
 if __name__ == "__main__":
-    print(read_file("..\\Sample Data\\5551511305C2106151272004_07-20-54.dat").keys())
+    file=read_file("..\\Sample Data\\5551511305C2106151272004_07-20-54.dat")
+    print_dict(file,0)
 
