@@ -34,5 +34,5 @@ def read_file(filename):
     return complete
 
 if __name__ == "__main__":
-    print(read_file("..\\Sample Data\\5551511305C2106151272004_07-20-54.dat"))
+    print(read_file("..\\Sample Data\\5551511305C2106151272004_07-20-54.dat").keys())
 
