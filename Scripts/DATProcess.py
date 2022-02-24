@@ -46,7 +46,7 @@ def processDAT(filepath,source_path,output_path,archive_path):
     print(threading.current_thread().name,"- Processing "+filepath)
     with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""),"w") as file:
         file.write(str(read_file(filepath)))
-    shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
+    shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".dat",".txt"))
     print(threading.current_thread().name,"- Finished Processing "+filepath)
 
 if __name__ == "__main__":
