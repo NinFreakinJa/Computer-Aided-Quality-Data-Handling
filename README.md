@@ -3,5 +3,6 @@
 
 ### Packages Used
 * watchdog
+* pandas
 
 #### Compile CAQDH.py in Scripts folder with pyinstaller
