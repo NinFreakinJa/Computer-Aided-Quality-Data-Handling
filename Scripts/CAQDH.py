@@ -4,6 +4,7 @@ import threading
 import watchdogHandler
 import getPaths
 import os
+import DATProcess
 
 # Goes through input folders and processes any files already there.
 def initial_pass(paths):
@@ -20,7 +21,7 @@ def initial_pass(paths):
                         print(threading.current_thread().name,"- XML Detected: "+os.path.join(root, name))
                     elif(extension=="dat"):
                         getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
-                        print(threading.current_thread().name,"- DAT detected: "+os.path.join(root, name))
+                        DATProcess.processDAT(os.path.join(root, name),j,i["output_path"],i["archive_path"])
                     elif(extension=="xls"):
                         getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                         print(threading.current_thread().name,"- XLS dectected: "+os.path.join(root, name))
