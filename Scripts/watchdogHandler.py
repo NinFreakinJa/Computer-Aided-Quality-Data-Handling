@@ -9,12 +9,13 @@ import shutil
 from getPaths import checkPathExists
 import threading
 import DATProcess
+import ExcelProcess
 
 #code modified from https://www.geeksforgeeks.org/create-a-watchdog-in-python-to-look-for-filesystem-changes/
 class Handler(watchdog.events.PatternMatchingEventHandler):
     def __init__(self,source_path,output_path,archive_path):
         # Set the patterns for PatternMatchingEventHandler
-        watchdog.events.PatternMatchingEventHandler.__init__(self, patterns=['*.xml','*.dat','*.dfq','*.xls'],ignore_directories=False, case_sensitive=False)
+        watchdog.events.PatternMatchingEventHandler.__init__(self, patterns=['*.xml','*.dat','*.dfq','*.xls','*.xlsx'],ignore_directories=False, case_sensitive=False)
         self.output_path=output_path
         self.archive_path=archive_path
         self.source_path = source_path
@@ -30,8 +31,8 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
             print(threading.current_thread().name,"- XML Detected")
         elif(extension=="dat"):
             DATProcess.processDAT(event.src_path,self.source_path,self.output_path,self.archive_path)
-        elif(extension=="xls"):
-            print(threading.current_thread().name,"- XLS dectected")
+        elif(extension=="xls" or extension=="xlsx"):
+            ExcelProcess.processExcel(event.src_path,self.source_path,self.output_path,self.archive_path)
         else:
             print(threading.current_thread().name,"- File type not supported")
 

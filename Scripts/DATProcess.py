@@ -44,13 +44,7 @@ def print_dict(input,indent):
 
 def processDAT(filepath,source_path,output_path,archive_path):
     print(threading.current_thread().name,"- Processing "+filepath)
-    with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""),"w") as file:
+    with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".dat",".txt"),"w") as file:
         file.write(str(read_file(filepath)))
-    shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".dat",".txt"))
+    shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
     print(threading.current_thread().name,"- Finished Processing "+filepath)
-
-if __name__ == "__main__":
-    file=read_file("..\\Sample Data\\5551511305C2106151272004_07-20-54.dat")
-    print_dict(file,0)
-    #print(file)
-

@@ -5,6 +5,7 @@ import watchdogHandler
 import getPaths
 import os
 import DATProcess
+import ExcelProcess
 
 # Goes through input folders and processes any files already there.
 def initial_pass(paths):
@@ -22,9 +23,9 @@ def initial_pass(paths):
                     elif(extension=="dat"):
                         getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                         DATProcess.processDAT(os.path.join(root, name),j,i["output_path"],i["archive_path"])
-                    elif(extension=="xls"):
+                    elif(extension=="xls" or extension=="xlsx"):
                         getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
-                        print(threading.current_thread().name,"- XLS dectected: "+os.path.join(root, name))
+                        ExcelProcess.processExcel(os.path.join(root, name),j,i["output_path"],i["archive_path"])
 
 if __name__ == "__main__":
     paths=getPaths.getPaths_JSON()
