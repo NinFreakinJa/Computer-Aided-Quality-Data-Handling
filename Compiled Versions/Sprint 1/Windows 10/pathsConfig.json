@@ -2,7 +2,7 @@
     "paths": [    
         {
             "input_paths": [
-                "..\\..\\..\\Sample Data",
+                "..\\..\\..\\Sample Data Copy",
                 "..\\..\\..\\TestPath"
             ],
             "output_path" : "..\\..\\..\\Output",

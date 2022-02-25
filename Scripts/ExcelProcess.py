@@ -4,20 +4,23 @@ import shutil
 import os
 
 def read_file(fileName):
-    #Determine Excel Type
-    xls = pd.ExcelFile(fileName)
-    numSheets = len(xls.sheet_names)
+    try:
+        #Determine Excel Type
+        xls = pd.ExcelFile(fileName)
+        numSheets = len(xls.sheet_names)
 
-    if numSheets == 1:
-        repo = pd.read_excel(xls, 'Sum Report')
-        repo.dropna(how='all', axis=1, inplace=True)
-        repo.dropna(how='all', axis=0, inplace=True)
-        return repo
-    else:
-        proto = pd.read_excel(xls, 'Protokoll_Intern')
-        proto.dropna(how='all', axis=1, inplace=True)
-        proto.dropna(how='all', axis=0, inplace=True)
-        return proto
+        if numSheets == 1:
+            repo = pd.read_excel(xls, 'Sum Report')
+            repo.dropna(how='all', axis=1, inplace=True)
+            repo.dropna(how='all', axis=0, inplace=True)
+            return repo
+        else:
+            proto = pd.read_excel(xls, 'Protokoll_Intern')
+            proto.dropna(how='all', axis=1, inplace=True)
+            proto.dropna(how='all', axis=0, inplace=True)
+            return proto
+    except:
+        return pd.DataFrame()
 
 def processExcel(filepath,source_path,output_path,archive_path):
     if(os.path.exists(filepath)):
