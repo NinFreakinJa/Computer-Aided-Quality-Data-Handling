@@ -11,6 +11,7 @@ import threading
 import DATProcess
 import ExcelProcess
 import XMLProcess
+import os
 
 #code modified from https://www.geeksforgeeks.org/create-a-watchdog-in-python-to-look-for-filesystem-changes/
 class Handler(watchdog.events.PatternMatchingEventHandler):
@@ -22,20 +23,21 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         self.source_path = source_path
   
     def on_created(self, event):
-        print(threading.current_thread().name," - File Created - % s." %(event.src_path))
-        checkPathExists("\\".join(event.src_path.split("\\")[:-1]),self.source_path,self.output_path,self.archive_path)
-        # Event is created, you can process it now
-        extension=event.src_path.split('.')[-1]
-        if(extension=='dfq'):
-            processDFQ(event.src_path,self.source_path,self.output_path,self.archive_path)
-        elif(extension=='xml'):
-            XMLProcess.processXML(event.src_path,self.source_path,self.output_path,self.archive_path)
-        elif(extension=="dat"):
-            DATProcess.processDAT(event.src_path,self.source_path,self.output_path,self.archive_path)
-        elif(extension=="xls" or extension=="xlsx"):
-            ExcelProcess.processExcel(event.src_path,self.source_path,self.output_path,self.archive_path)
-        else:
-            print(threading.current_thread().name,"- File type not supported")
+        if(os.path.exists(event.src_path)):
+            print(threading.current_thread().name," - File Created - % s." %(event.src_path))
+            checkPathExists("\\".join(event.src_path.split("\\")[:-1]),self.source_path,self.output_path,self.archive_path)
+            # Event is created, you can process it now
+            extension=event.src_path.split('.')[-1]
+            if(extension=='dfq'):
+                processDFQ(event.src_path,self.source_path,self.output_path,self.archive_path)
+            elif(extension=='xml'):
+                XMLProcess.processXML(event.src_path,self.source_path,self.output_path,self.archive_path)
+            elif(extension=="dat"):
+                DATProcess.processDAT(event.src_path,self.source_path,self.output_path,self.archive_path)
+            elif(extension=="xls" or extension=="xlsx"):
+                ExcelProcess.processExcel(event.src_path,self.source_path,self.output_path,self.archive_path)
+            else:
+                print(threading.current_thread().name,"- File type not supported")
 
 # Initiallization for watchdog
 def startWatchdog(source_path,output_path,archive_path):
@@ -54,7 +56,10 @@ def startWatchdog(source_path,output_path,archive_path):
 
 # DFQ is copied to output path and original file is moved to archive path
 def processDFQ(filepath,source_path,output_path,archive_path):
-    print(threading.current_thread().name,"- Processing "+filepath)
-    shutil.copyfile(filepath,output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
-    shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
-    print(threading.current_thread().name,"- Finished Processing "+filepath)
+    if(os.path.exists(filepath)):
+        print(threading.current_thread().name,"- Processing "+filepath)
+        with open(filepath, 'r+') as file:
+            os.fsync(file)
+        shutil.copyfile(filepath,output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
+        shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
+        print(threading.current_thread().name,"- Finished Processing "+filepath)

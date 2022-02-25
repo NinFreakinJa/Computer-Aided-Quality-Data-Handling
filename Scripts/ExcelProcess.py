@@ -1,6 +1,7 @@
 import pandas as pd
 import threading
 import shutil
+import os
 
 def read_file(fileName):
     #Determine Excel Type
@@ -19,8 +20,12 @@ def read_file(fileName):
         return proto
 
 def processExcel(filepath,source_path,output_path,archive_path):
-    print(threading.current_thread().name,"- Processing "+filepath)
-    with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".xlsx",".txt").replace(".xls",".txt"),"w") as file:
-        file.write(read_file(filepath).to_string())
-    shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
-    print(threading.current_thread().name,"- Finished Processing "+filepath)
+    if(os.path.exists(filepath)):
+        print(threading.current_thread().name,"- Processing "+filepath)
+        with open(filepath, 'r+') as file:
+            os.fsync(file)
+        with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".xlsx",".txt").replace(".xls",".txt"),"w") as file:
+            file.write(read_file(filepath).to_string())
+            os.fsync(file)
+        shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
+        print(threading.current_thread().name,"- Finished Processing "+filepath)
