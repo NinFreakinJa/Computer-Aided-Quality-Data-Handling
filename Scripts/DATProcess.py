@@ -1,8 +1,10 @@
 import threading
 import shutil
+import pprint
+from collections import OrderedDict
 
 def read_file(filename):
-    complete=dict()
+    complete=OrderedDict()
     current=complete
     stack=[complete]
     read=False
@@ -44,7 +46,7 @@ def print_dict(input,indent):
 
 def processDAT(filepath,source_path,output_path,archive_path):
     print(threading.current_thread().name,"- Processing "+filepath)
-    with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".dat",".txt"),"w") as file:
-        file.write(str(read_file(filepath)))
+    with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".dat",".txt"),"wt") as file:
+        pprint.pprint(read_file(filepath), stream=file)
     shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
     print(threading.current_thread().name,"- Finished Processing "+filepath)

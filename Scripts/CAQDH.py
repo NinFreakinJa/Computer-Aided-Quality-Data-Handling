@@ -6,6 +6,7 @@ import getPaths
 import os
 import DATProcess
 import ExcelProcess
+import XMLProcess
 
 # Goes through input folders and processes any files already there.
 def initial_pass(paths):
@@ -19,7 +20,7 @@ def initial_pass(paths):
                         watchdogHandler.processDFQ(os.path.join(root, name),j,i["output_path"],i["archive_path"])
                     elif(extension=='xml'):
                         getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
-                        print(threading.current_thread().name,"- XML Detected: "+os.path.join(root, name))
+                        XMLProcess.processXML(os.path.join(root, name),j,i["output_path"],i["archive_path"])
                     elif(extension=="dat"):
                         getPaths.checkPathExists(root,j,i["output_path"],i["archive_path"])
                         DATProcess.processDAT(os.path.join(root, name),j,i["output_path"],i["archive_path"])

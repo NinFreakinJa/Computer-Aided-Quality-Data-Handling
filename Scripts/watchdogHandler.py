@@ -10,6 +10,7 @@ from getPaths import checkPathExists
 import threading
 import DATProcess
 import ExcelProcess
+import XMLProcess
 
 #code modified from https://www.geeksforgeeks.org/create-a-watchdog-in-python-to-look-for-filesystem-changes/
 class Handler(watchdog.events.PatternMatchingEventHandler):
@@ -28,7 +29,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         if(extension=='dfq'):
             processDFQ(event.src_path,self.source_path,self.output_path,self.archive_path)
         elif(extension=='xml'):
-            print(threading.current_thread().name,"- XML Detected")
+            XMLProcess.processXML(event.src_path,self.source_path,self.output_path,self.archive_path)
         elif(extension=="dat"):
             DATProcess.processDAT(event.src_path,self.source_path,self.output_path,self.archive_path)
         elif(extension=="xls" or extension=="xlsx"):
