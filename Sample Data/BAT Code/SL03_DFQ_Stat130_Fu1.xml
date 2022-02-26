@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<DFQconvert>
+    <Settings>
+        <Prefix>Data = "</Prefix>
+        <Postfix>"</Postfix>
+        <Date>@ResHead.ResDate@</Date>
+        <Time>@ResHead.ResTime@</Time>
+    </Settings>
+    
+    <TargetFiles>
+        <TargetFile>
+            <FileName>D:\EV14_SL03\ALR\DFQ\Stat130.@ResHead.StatIndex@\Fu1\$Year$\$Month$\$Day$\$Year$$Month$$Day$_@ResHead.TypeNo@.dfq</FileName>
+        </TargetFile>
+        <TargetFile>
+            <FileName>D:\EV14_SL03\ALR\DFQ\Stat130.@ResHead.StatIndex@\Fu1\LastHour.dfq</FileName>
+            <NewFile>K1001,@ResHead.TypeNo@;K1115,$Date$</NewFile>
+            <AgeLimit desc="in hours">1</AgeLimit>
+        </TargetFile>
+    </TargetFiles>
+    
+    <PartData>
+        <kValue name="K0100">$CharacteristicCount$</kValue>
+        <kValue name="K1001">@ResHead.TypeNo@</kValue>
+        <kValue name="K1002">EV14</kValue>
+        <kValue name="K1005">EV14</kValue>
+        <kValue name="K1081">@ResHead.StationNo@</kValue>
+        <kValue name="K1082">Station @ResHead.StationNo@ Fu @ResHead.FuNo@</kValue>
+        <kValue name="K1100">EV14</kValue>
+        <kValue name="K1101">Ba</kValue>
+        <kValue name="K1102">EV14 Linie @ResHead.LineNo@</kValue>
+        <kValue name="K1115">@ResHead.ResDate@</kValue>
+    </PartData>
+    
+    <Characteristics>
+        
+        <GlobalValues>
+            <kValue name="K0002">0</kValue>
+            <kValue name="K0004">@ResHead.ResDate@/@ResHead.ResTime@</kValue>
+            <kValue name="K0005">0</kValue>
+            <kValue name="K0006">@ResHead.Identifier@</kValue>
+            <kValue name="K0007">@ResHead.StatIndex@</kValue>
+            <kValue name="K0010">@ResHead.StationNo@</kValue>
+            <kValue name="K0099">@ResHead.LineNo@</kValue>
+        </GlobalValues>
+        
+        <Characteristic desc="001: Result">
+            <Header>
+                <kValue name="K2001">2</kValue>
+                <kValue name="K2002">Result</kValue>
+                <kValue name="K2022">0</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@ResHead.Result@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="002: NioBits">
+            <Header>
+                <kValue name="K2001">6</kValue>
+                <kValue name="K2002">NioBits</kValue>
+                <kValue name="K2022">0</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@ResHead.NioBits@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="003: Qdyn">
+            <Header>
+                <kValue name="K2001">10</kValue>
+                <kValue name="K2002">Flow QDyn</kValue>
+                <kValue name="K2022">3</kValue>
+                <kValue name="K2110">@FlowSet.QDyn.LoLim@</kValue>
+                <kValue name="K2111">@FlowSet.QDyn.UpLim@</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.QDyn.Value@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="004: QStat">
+            <Header>
+                <kValue name="K2001">12</kValue>
+                <kValue name="K2002">Flow QStat</kValue>
+                <kValue name="K2022">3</kValue>
+                <kValue name="K2110">@FlowSet.QStat.LoLim@</kValue>
+                <kValue name="K2111">@FlowSet.QStat.UpLim@</kValue>
+                <kValue name="K2142">g / stroke</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.QStat.Value@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="005: PressureQDyn">
+            <Header>
+                <kValue name="K2001">14</kValue>
+                <kValue name="K2002">Pressure QDyn</kValue>
+                <kValue name="K2022">3</kValue>
+                <kValue name="K2110">@FlowSet.PressureQDyn.LoLim@</kValue>
+                <kValue name="K2111">@FlowSet.PressureQDyn.UpLim@</kValue>
+                <kValue name="K2142">bar</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.PressureQDyn.Value@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="006: PressureQStat">
+            <Header>
+                <kValue name="K2001">16</kValue>
+                <kValue name="K2002">Pressure QStat</kValue>
+                <kValue name="K2022">3</kValue>
+                <kValue name="K2110">@FlowSet.PressureQStat.LoLim@</kValue>
+                <kValue name="K2111">@FlowSet.PressureQStat.UpLim@</kValue>
+                <kValue name="K2142">bar</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.PressureQStat.Value@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="007: QDynDelivery">
+            <Header>
+                <kValue name="K2001">18</kValue>
+                <kValue name="K2002">Qdyn Delivery</kValue>
+                <kValue name="K2022">3</kValue>
+                <kValue name="K2110">@FlowSet.QDynDelivery.LoLim@</kValue>
+                <kValue name="K2111">@FlowSet.QDynDelivery.UpLim@</kValue>
+                <kValue name="K2142">mg / stroke</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.QDynDelivery.Value@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="008: Leakage">
+            <Header>
+                <kValue name="K2001">20</kValue>
+                <kValue name="K2002">Leakage</kValue>
+                <kValue name="K2022">4</kValue>
+                <kValue name="K2110">0</kValue>
+                <kValue name="K2111">10</kValue>
+                <kValue name="K2142">mg / stroke</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.Leakage@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="009: MaxForce">
+            <Header>
+                <kValue name="K2001">21</kValue>
+                <kValue name="K2002">Max. force</kValue>
+                <kValue name="K2022">3</kValue>
+                <kValue name="K2110">0</kValue>
+                <kValue name="K2111">2000</kValue>
+                <kValue name="K2142">N</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.MaxForce@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="010: DanOffsetDyn">
+            <Header>
+                <kValue name="K2001">22</kValue>
+                <kValue name="K2002">DanOffsetDyn</kValue>
+                <kValue name="K2022">3</kValue>
+                <kValue name="K2142">mg / stroke</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.DanOffsetDyn@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="011: DanOffsetStat">
+            <Header>
+                <kValue name="K2001">23</kValue>
+                <kValue name="K2002">DanOffsetStat</kValue>
+                <kValue name="K2022">3</kValue>
+                <kValue name="K2142">g / min</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.DanOffsetStat@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="012: MediumTemp">
+            <Header>
+                <kValue name="K2001">24</kValue>
+                <kValue name="K2002">MediumTemp</kValue>
+                <kValue name="K2022">3</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.MediumTemp@</kValue>
+            </Data>
+        </Characteristic>
+        
+        <Characteristic desc="013: Density">
+            <Header>
+                <kValue name="K2001">25</kValue>
+                <kValue name="K2002">Density</kValue>
+                <kValue name="K2022">3</kValue>
+            </Header>
+            <Data>
+                <kValue name="K0001">@FlowSet.Density@</kValue>
+            </Data>
+        </Characteristic>
+        
+    </Characteristics>
+</DFQconvert>

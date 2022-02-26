@@ -1,0 +1,230 @@
+; Version: V02
+; Date:    02/25/2022
+; Time:    18:24:01
+;
+HKEY_LOCAL_MACHINE\Software\Bosch\OpCon\ChW_8187\Stat_130\DataStructures\ResultDataStruct\FU1 #Index
+  _Format = REG_DWORD 0x0
+  _Crc32_Struct = REG_DWORD 0xd9170fe8
+  _Id = "eb852cff-9629-11ec-a451-00e04b023844"
+  _VersionDate = "4.461776667824e+004"
+  ResHead #Index
+    StructName = "DbResultDataHeadSaveStruct"
+    TypeNo
+      VarType = REG_DWORD 0x8
+      Data = "0280158234"
+    TypeVar
+      VarType = REG_DWORD 0x8
+      Data = "          "
+    LineNo
+      VarType = REG_DWORD 0x3
+      Data = "3"
+    StationNo
+      VarType = REG_DWORD 0x3
+      Data = "130"
+    StatIndex
+      VarType = REG_DWORD 0x3
+      Data = "3"
+    FuNo
+      VarType = REG_DWORD 0x3
+      Data = "1"
+    WorkPos
+      VarType = REG_DWORD 0x3
+      Data = "5"
+    ToolPos
+      VarType = REG_DWORD 0x3
+      Data = "4"
+    ResDate
+      VarType = REG_DWORD 0x8
+      Data = "25.02.2022"
+    ResTime
+      VarType = REG_DWORD 0x8
+      Data = "18:24:00"
+    Identifier
+      VarType = REG_DWORD 0x8
+      Data = "20384"
+    NioBits
+      VarType = REG_DWORD 0x3
+      Data = "0"
+    DateUTC
+      VarType = REG_DWORD 0x8
+      Data = "25.02.2022"
+    TimeUTC
+      VarType = REG_DWORD 0x8
+      Data = "23:24:00"
+    Shift
+      VarType = REG_DWORD 0x3
+      Data = "2"
+    TypeId
+      VarType = REG_DWORD 0x8
+      Data = "39df4b8c-52fc-42cd-91bc-a60e9adb1f68"
+    PartAttrib
+      VarType = REG_DWORD 0x3
+      Data = "0"
+    Charge
+      VarType = REG_DWORD 0x8
+      Data = ""
+    WorkCycleCounter
+      VarType = REG_DWORD 0x3
+      Data = "0"
+    PStatInterval
+      VarType = REG_DWORD 0x3
+      Data = "118283"
+    Result
+      VarType = REG_DWORD 0x3
+      Data = "1"
+    ResFileName
+      VarType = REG_DWORD 0x8
+      Data = "322225180453A"
+  FlowSet #Index
+    StructName = "ResultDataStat130ValStruct"
+    QDynDelivery
+      StructName = "UserTdResultReal"
+      CheckType
+        VarType = REG_DWORD 0x3
+        Data = "1"
+      LoLim
+        VarType = REG_DWORD 0x4
+        Data = "0.000000"
+      Result
+        VarType = REG_DWORD 0x3
+        Data = "1"
+      UpLim
+        VarType = REG_DWORD 0x4
+        Data = "9.975000"
+      Value
+        VarType = REG_DWORD 0x4
+        Data = "7.992346"
+    QDyn1stSetting
+      VarType = REG_DWORD 0x4
+      Data = "6.895702"
+    QDyn2ndSetting
+      VarType = REG_DWORD 0x4
+      Data = "0.000000"
+    QDyn
+      StructName = "UserTdResultReal"
+      CheckType
+        VarType = REG_DWORD 0x3
+        Data = "5"
+      LoLim
+        VarType = REG_DWORD 0x4
+        Data = "6.520000"
+      Result
+        VarType = REG_DWORD 0x3
+        Data = "1"
+      UpLim
+        VarType = REG_DWORD 0x4
+        Data = "6.780000"
+      Value
+        VarType = REG_DWORD 0x4
+        Data = "6.625293"
+    PressureQDyn
+      StructName = "UserTdResultReal"
+      CheckType
+        VarType = REG_DWORD 0x3
+        Data = "5"
+      LoLim
+        VarType = REG_DWORD 0x4
+        Data = "2.900000"
+      Result
+        VarType = REG_DWORD 0x3
+        Data = "1"
+      UpLim
+        VarType = REG_DWORD 0x4
+        Data = "3.100000"
+      Value
+        VarType = REG_DWORD 0x4
+        Data = "3.043333"
+    Leakage
+      VarType = REG_DWORD 0x4
+      Data = "0.000000"
+    QStat
+      StructName = "UserTdResultReal"
+      CheckType
+        VarType = REG_DWORD 0x3
+        Data = "5"
+      LoLim
+        VarType = REG_DWORD 0x4
+        Data = "232.800003"
+      Result
+        VarType = REG_DWORD 0x3
+        Data = "1"
+      UpLim
+        VarType = REG_DWORD 0x4
+        Data = "247.199997"
+      Value
+        VarType = REG_DWORD 0x4
+        Data = "237.840286"
+    PressureQStat
+      StructName = "UserTdResultReal"
+      CheckType
+        VarType = REG_DWORD 0x3
+        Data = "5"
+      LoLim
+        VarType = REG_DWORD 0x4
+        Data = "2.000000"
+      Result
+        VarType = REG_DWORD 0x3
+        Data = "1"
+      UpLim
+        VarType = REG_DWORD 0x4
+        Data = "3.100000"
+      Value
+        VarType = REG_DWORD 0x4
+        Data = "2.449333"
+    RangeQDyn[1]
+      VarType = REG_DWORD 0x4
+      Data = "0.015834"
+    RangeQDyn[2]
+      VarType = REG_DWORD 0x4
+      Data = "0.022764"
+    RangeQDyn[3]
+      VarType = REG_DWORD 0x4
+      Data = "0.008941"
+    RangeQDyn[4]
+      VarType = REG_DWORD 0x4
+      Data = "0.000000"
+    RangeQLeak
+      VarType = REG_DWORD 0x4
+      Data = "0.000000"
+    RangeQStat
+      VarType = REG_DWORD 0x4
+      Data = "0.000000"
+    SmFactor[1]
+      VarType = REG_DWORD 0x4
+      Data = "0.109000"
+    SmFactor[2]
+      VarType = REG_DWORD 0x4
+      Data = "0.100000"
+    SmFactor[3]
+      VarType = REG_DWORD 0x4
+      Data = "0.106000"
+    SettingAbsSmSteps[1]
+      VarType = REG_DWORD 0x4
+      Data = "1727.000000"
+    SettingAbsSmSteps[2]
+      VarType = REG_DWORD 0x4
+      Data = "2775.000000"
+    SettingAbsSmSteps[3]
+      VarType = REG_DWORD 0x4
+      Data = "3021.000000"
+    SettingAbsSmSteps[4]
+      VarType = REG_DWORD 0x4
+      Data = "0.000000"
+    DanOffsetDyn
+      VarType = REG_DWORD 0x4
+      Data = "1.170000"
+    DanOffsetStat
+      VarType = REG_DWORD 0x4
+      Data = "27.500000"
+    MaxForce
+      VarType = REG_DWORD 0x4
+      Data = "111.360001"
+    MediumTemp
+      VarType = REG_DWORD 0x4
+      Data = "27.506220"
+    Density
+      VarType = REG_DWORD 0x4
+      Data = "0.781739"
+    ValveSeatLotNo
+      VarType = REG_DWORD 0x8
+      Data = "88371-04"
