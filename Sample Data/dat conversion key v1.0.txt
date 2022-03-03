@@ -1,0 +1,67 @@
+//This is a handmade conversion of 026150076720201202070930435310-3NGA0_20220216_132956.dat
+K0100 # //number of characteristics
+K1001 026150076720201202070930435310-3NGA0 //part id
+K1115 16/02/22 //document date
+K0001/1 1 //value
+K2002/1 test result //description
+K2022/1 0 //decimal places
+K0001/2 0261500 76
+K2002/2 current type no.
+K2022/2 0
+K0001/3 0
+K2002/3 WorkingCode
+K2022/3 0
+K0001/4 4
+K2002/4 part state
+K2022/4 0
+K0001/5 0
+K2002/5 NOK bits
+K2022/5 0
+K0001/6 0
+K2002/6 work cycle count
+K2022/6 0
+.
+.
+.
+K0001/12 0
+K2002/12 SPC test(s) to be performed
+K2022/12 0
+K0001/13 0.003138971
+K2002/13 Leakage
+K2022/13 9
+K2110/13 -0.02
+K2111/13 1.95
+K2142/13 mm³/min
+K0001/14 3.979614
+K2002/14 seal top
+K2022/14 6
+K2110/14 3.5
+K2111/14 4.5
+K2142/14 bar
+K0001/15 6.124149
+K2002/15 seal bottom
+K2022/15 6
+K2110/15 5.5
+K2111/15 7
+K2142/15 bar
+K0001/16 6.630756
+K2002/16 pressure rinse
+K2022/16 6
+K2110/16 4
+K2111/16 8
+K2142/16 bar
+K0001/17 0.5952941
+K2002/17 pressure rinse chamber
+K2022/17 7
+K2110/17 0.4
+K2111/17 1
+K2142/17 bar
+.
+.
+.
+K0001/23 29.92648
+K2002/23 Temperature
+K2022/23 5
+K2110/23 28
+K2111/23 31
+K2142/23 °C
