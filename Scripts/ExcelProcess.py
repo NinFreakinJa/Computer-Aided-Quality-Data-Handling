@@ -13,20 +13,17 @@ def read_file(fileName):
             repo = pd.read_excel(xls, 'Sum Report')
             repo.dropna(how='all', axis=1, inplace=True)
             repo.dropna(how='all', axis=0, inplace=True)
-            return repo
+            return convertNacXls(repo)
         else:
             proto = pd.read_excel(xls, 'Protokoll_Intern')
             proto.dropna(how='all', axis=1, inplace=True)
             proto.dropna(how='all', axis=0, inplace=True)
-            return proto
+            return proto.to_string()
     except:
-        return pd.DataFrame()
+        return ""
 
-def convertNacXls(file):
+def convertNacXls(xls):
 #Prepare dataframe for conversion    
-    
-    #Convert NAC Xls into a dataframe
-    xls = excel_to_df(file)
     
     #Split header and data into two dataframes
     header = xls.iloc[:10, :28]
@@ -59,20 +56,8 @@ def convertNacXls(file):
             dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
 
         #Determine unit of measurement
-        if str(data.iloc[r+1,c]) == "[ms]":
-            dfq += "K2142/" + str(c+1) + " " + "ms" + "\n"
-        elif str(data.iloc[r+1,c]) == "[V]":
-            dfq += "K2142/" + str(c+1) + " " + "V" + "\n"
-        elif str(data.iloc[r+1,c]) == "[mg/ pulse]":
-            dfq += "K2142/" + str(c+1) + " " + "mg/pulse" + "\n"
-        elif str(data.iloc[r+1,c]) == "[%]":
-            dfq += "K2142/" + str(c+1) + " " + "%" + "\n"
-        elif str(data.iloc[r+1,c]) == "'[g/min]":
-            dfq += "K2142/" + str(c+1) + " " + "g/min" + "\n"
-        elif str(data.iloc[r+1,c]) == "[ohm]":
-            dfq += "K2142/" + str(c+1) + " " + "ohm" + "\n"
-        elif str(data.iloc[r+1,c]) == "[mH]":
-            dfq += "K2142/" + str(c+1) + " " + "mH" + "\n"
+        if(str(data.iloc[r+1,c])!="[-]"):
+            dfq += "K2142/" + str(c+1) + str(data.iloc[r+1,c]).strip("[]")
 
     #For loop to dump remain
     for i in range (2,8):
@@ -90,8 +75,8 @@ def processExcel(filepath,source_path,output_path,archive_path):
         print(threading.current_thread().name,"- Processing "+filepath)
         with open(filepath, 'r+') as file:
             os.fsync(file)
-        with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".xlsx",".txt").replace(".xls",".txt"),"w") as file:
-            file.write(read_file(filepath).to_string())
+        with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".xlsx",".dfq").replace(".xls",".dfq"),"w") as file:
+            file.write(read_file(filepath))
             os.fsync(file)
         shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
         print(threading.current_thread().name,"- Finished Processing "+filepath)
