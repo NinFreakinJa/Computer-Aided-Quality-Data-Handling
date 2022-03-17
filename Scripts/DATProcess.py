@@ -56,8 +56,12 @@ def conversion(conversion):
     conversion[1]=1
     for i in conversion[0]["Head #Index"]:
        if(i!="PartId" and "Data" in conversion[0]["Head #Index"][i].keys() and "Properties" in conversion[0]["Head #Index"][i].keys() and conversion[0]["Head #Index"][i]["Data"]!=""):
-           conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Properties"]["Label_E"]+"\n"
-           conversion[1]+=1
+            conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Properties"]["Label_E"]+"\n"
+            if(len(conversion[0]["Head #Index"][i]["Data"].split("."))>=2):
+                conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(conversion[0]["Head #Index"][i]["Data"].split(".")[1]))+"\n"
+            else:
+                conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
+            conversion[1]+=1
     conversion=conversion_helper(conversion,conversion[0])
     conversion[1]-=1
     conversion[2]="K0100 "+str(conversion[1])+"\n"+conversion[2]
@@ -69,7 +73,11 @@ def conversion_helper(conversion,current):
             if(type(current[i])==OrderedDict):
                 conversion=conversion_helper(conversion,current[i])
                 if("Properties" in current[i].keys() and "Value" in current[i].keys()):
-                    conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+current[i]["Value"]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+current[i]["Properties"]["Label_E"]+"\n"+"K2022/"+str(conversion[1])+" "+str(len(current[i]["Value"]["Data"].split(".")[1]))+"\n"
+                    conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+current[i]["Value"]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+current[i]["Properties"]["Label_E"]+"\n"
+                    if(len(current[i]["Value"]["Data"].split("."))>=2):
+                        conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(current[i]["Value"]["Data"].split(".")[1]))+"\n"
+                    else:
+                        conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
                     if("LoLim" in current[i].keys()):
                         conversion[2]=conversion[2]+"K2110/"+str(conversion[1])+" "+current[i]["LoLim"]["Data"]+"\n"
                     if("UpLim" in current[i].keys()):

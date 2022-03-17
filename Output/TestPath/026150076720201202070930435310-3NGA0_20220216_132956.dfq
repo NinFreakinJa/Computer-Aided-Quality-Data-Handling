@@ -3,26 +3,37 @@ K1001 026150076720201202070930435310-3NGA0
 K0004 16.02.2022/08:29:56
 K0001/1 1
 K2002/1 test result
+K2022/1 0
 K0001/2 0261500 76
 K2002/2 current type no.
+K2022/2 0
 K0001/3 4
 K2002/3 part state
+K2022/3 0
 K0001/4 0
 K2002/4 NOK bits
+K2022/4 0
 K0001/5 0
 K2002/5 work cycle count
+K2022/5 0
 K0001/6 0
 K2002/6 previous cycle time
+K2022/6 0
 K0001/7 -1
 K2002/7 part for process
+K2022/7 0
 K0001/8 0
 K2002/8 let part pass through
+K2022/8 0
 K0001/9 0
 K2002/9 change over necessary
+K2022/9 0
 K0001/10 140
 K2002/10 next process number
+K2022/10 0
 K0001/11 0
 K2002/11 SPC test(s) to be performed
+K2022/11 0
 K0001/12 -0.003138971
 K2002/12 Leakage
 K2022/12 9
