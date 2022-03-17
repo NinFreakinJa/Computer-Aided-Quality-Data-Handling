@@ -52,8 +52,14 @@ def format_date(datetime):
 # conversion is an array with the dat dictionary in index 0 and the current count of characteristics in index 1 and current converted string in index 2
 def conversion(conversion):
     conversion[2]=""
-    conversion[2]=conversion[2]+"K1001 "+conversion[0]["Head #Index"]["PartId"]["Data"]+"\n"+"K0004 "+conversion[0]["Date"]+"\n"
+    if("PartId" in conversion[0]["Head #Index"].keys()):
+        conversion[2]=conversion[2]+"K1001 "+conversion[0]["Head #Index"]["PartId"]["Data"]+"\n"+"K0004 "+conversion[0]["Date"]+"\n"
+    else:
+        conversion[2]=conversion[2]+"K1001 "+conversion[0]["MesUniqueID"]["Data"]+"\n"+"K0004 "+conversion[0]["Date"]+"\n"
     conversion[1]=1
+    conversion[3]=""
+    conversion[4]=""
+    conversion[5]=""
     for i in conversion[0]["Head #Index"]:
        if(i!="PartId" and "Data" in conversion[0]["Head #Index"][i].keys() and "Properties" in conversion[0]["Head #Index"][i].keys() and conversion[0]["Head #Index"][i]["Data"]!=""):
             conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Properties"]["Label_E"]+"\n"
@@ -61,32 +67,64 @@ def conversion(conversion):
                 conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(conversion[0]["Head #Index"][i]["Data"].split(".")[1]))+"\n"
             else:
                 conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
+            conversion[4]+=conversion[0]["Head #Index"][i]["Data"]+chr(0x000f)
             conversion[1]+=1
-    conversion=conversion_helper(conversion,conversion[0])
+    conversion=conversion_helper(conversion,conversion[0],True)
     conversion[1]-=1
     conversion[2]="K0100 "+str(conversion[1])+"\n"+conversion[2]
+    if(conversion[3]!=""):
+        dumpCopy=conversion[3].split("\n")
+        conversion[3]=""
+        for i in dumpCopy:
+            if(i!=""):
+                conversion[3]+=conversion[4]+i+conversion[5]+"\n"
+        conversion[2]+=conversion[3]
     return conversion
 
-def conversion_helper(conversion,current):
+def conversion_helper(conversion,current,copy):
     for i in current:
         if(i!="Head #Index"):
             if(type(current[i])==OrderedDict):
-                conversion=conversion_helper(conversion,current[i])
-                if("Properties" in current[i].keys() and "Value" in current[i].keys()):
-                    conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+current[i]["Value"]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+current[i]["Properties"]["Label_E"]+"\n"
-                    if(len(current[i]["Value"]["Data"].split("."))>=2):
-                        conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(current[i]["Value"]["Data"].split(".")[1]))+"\n"
+                if("[" in i and not "[1]" in i):
+                    conversion=dump(conversion,current[i])
+                    conversion[3]+="\n"
+                else:
+                    if("[" in i or not copy):
+                        conversion=conversion_helper(conversion,current[i],False)
                     else:
-                        conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
-                    if("LoLim" in current[i].keys()):
-                        conversion[2]=conversion[2]+"K2110/"+str(conversion[1])+" "+current[i]["LoLim"]["Data"]+"\n"
-                    if("UpLim" in current[i].keys()):
-                        conversion[2]=conversion[2]+"K2111/"+str(conversion[1])+" "+current[i]["UpLim"]["Data"]+"\n"
-                    if("Unit" in current[i].keys()):
-                        conversion[2]=conversion[2]+"K2142/"+str(conversion[1])+" "+current[i]["Unit"]["Data"]+"\n"
-                    conversion[1]+=1
+                        conversion=conversion_helper(conversion,current[i],True)
+                    if(("Properties" in current[i].keys() or not copy) and "Value" in current[i].keys()):
+                        if(copy):
+                            conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+current[i]["Value"]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+current[i]["Properties"]["Label_E"]+"\n"
+                            conversion[5]+=current[i]["Value"]["Data"]+chr(0x000f)
+                        else:
+                            conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+current[i]["Value"]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+i.replace(" #Index","")+"\n"
+                        if(len(current[i]["Value"]["Data"].split("."))>=2):
+                            conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(current[i]["Value"]["Data"].split(".")[1]))+"\n"
+                        else:
+                            conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
+                        if("LoLim" in current[i].keys() and current[i]["LoLim"]["Data"]!=""):
+                            conversion[2]=conversion[2]+"K2110/"+str(conversion[1])+" "+current[i]["LoLim"]["Data"]+"\n"
+                        if("UpLim" in current[i].keys() and current[i]["UpLim"]["Data"]!=""):
+                            conversion[2]=conversion[2]+"K2111/"+str(conversion[1])+" "+current[i]["UpLim"]["Data"]+"\n"
+                        if("Unit" in current[i].keys() and current[i]["Unit"]["Data"]!=""):
+                            conversion[2]=conversion[2]+"K2142/"+str(conversion[1])+" "+current[i]["Unit"]["Data"]+"\n"
+                        conversion[1]+=1
     return conversion
 
+def dump(conversion, current):
+    for i in current:
+        if(i!="Head #Index"):
+            if(type(current[i])==OrderedDict):
+                if("[" in i and not "[1]" in i):
+                    conversion=dump(conversion,current[i])
+                else:
+                    conversion=dump(conversion,current[i])
+                    if("Value" in current[i].keys()):
+                        conversion[3]+=current[i]["Value"]["Data"]+chr(0x000f)
+                    if("[" in i):
+                        conversion[3]+="\n"
+    return conversion
 
 def processDAT(filepath,source_path,output_path,archive_path):
     if(os.path.exists(filepath)):
@@ -95,7 +133,7 @@ def processDAT(filepath,source_path,output_path,archive_path):
             os.fsync(file)
         with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".dat",".dfq"),"wt") as file:
             #pprint.pprint(read_file(filepath), stream=file)
-            file.write(conversion([read_file(filepath),0,""])[2])
+            file.write(conversion([read_file(filepath),0,"","","",""])[2])
             os.fsync(file)
         shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
         print(threading.current_thread().name,"- Finished Processing "+filepath)
