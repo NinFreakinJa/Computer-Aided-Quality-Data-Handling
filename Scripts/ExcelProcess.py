@@ -7,7 +7,7 @@ import os
 def read_file(fileName):
     try:
         #Determine Excel Type
-        xls = pd.ExcelFile("E:\\Users\\jreid\\Documents\\GitHub\\Computer-Aided-Quality-Data-Handling\\Sample Data\\Excel\\Matrix_SRE 4.0 - 0280158440-00.xls")
+        xls = pd.ExcelFile(fileName)
         numSheets = len(xls.sheet_names)
 
         if numSheets == 1:
