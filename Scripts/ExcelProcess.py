@@ -83,7 +83,7 @@ def convertMatXls(xls):
     
     #Split header and data into two dataframes
     header = xls.iloc[:12, :]
-    data = xls.iloc[12:,:]
+    data = xls.iloc[13:,:]
     
     #Create null test dataframe
     dfDimension = data.isna()
@@ -102,10 +102,10 @@ def convertMatXls(xls):
     dfq = ""
 
     #Add Defenite Header Info (Date/Time, Batch Name, # Characterisitics)
-    dfq += "K0004 " + str(header.iloc[3,3].strftime("%d.%m.%Y")) + "/" + str(header.iloc[4,3]) + "\n"
-    dfq += "K1001 " + str(header.iloc[3,4]) + "\n"
+    dfq += "K0004 " + str(header.iloc[1,2].strftime("%d.%m.%Y")) + "\n"
+    dfq += "K1001 " + str(header.iloc[2,2]) + "\n"
     dfq += "K0100 " + str(cc) + "\n"
-    dfq += "K1001/1 " + str(data.iloc[2,0]) +"\n"
+    dfq += "K1001/1 " + str(data.iloc[4,1]) +"\n"
     
 
     #Create loop to iterate df
@@ -116,14 +116,14 @@ def convertMatXls(xls):
             dfq += "K0001/" + str(c+1) + " " + str(data.iloc[r+2,c]) + "\n"
         
             dfq += "K2002/" + str(c+1) + " " + str(data.iloc[r,c]) + "\n"
-        
-            #Determine decimal places
-            if c == 1:
+
+           #Determine decimal places
+            if c == 1 or c == 2 or c == 3 or c == 4:
                 dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
-            elif c == 4 or c == 23 or c == 24 or c== 27:
-                dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
+            elif c == 20 or c == 21 or c == 22 or c == 23 or c == 24 or c == 25 or c == 26:
+                dfq += "K2022/" + str(c+1) + " " + str(1) + "\n" 
             else:
-                dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
+                dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
 
         #Determine unit of measurement
         for i in range (2,rc):
