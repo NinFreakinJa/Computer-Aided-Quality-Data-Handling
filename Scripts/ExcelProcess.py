@@ -112,15 +112,15 @@ def convertMatXls(xls):
     dfq += "K0100 " + str(cc) + "\n"
     dfq += "K1001/1 " + str(data.iloc[2,4]) +"\n"
     
-
+    charNum=1
     #Create loop to iterate df
     for c in range (1,cc):
         #Determine characteristic name/value
         r = 0
         if dfDimension.iloc[r+2,c] == False:
-            dfq += "K0001/" + str(c+1) + " " + str(data.iloc[r+2,c]) + "\n"
+            dfq += "K0001/" + str(charNum) + " " + str(data.iloc[r+2,c]) + "\n"
         
-            dfq += "K2002/" + str(c+1) + " " + str(data.iloc[r,c]) + "\n"
+            dfq += "K2002/" + str(charNum) + " " + str(data.iloc[r,c]) + "\n"
         
             #Determine decimal places
             # if c == 1:
@@ -131,22 +131,23 @@ def convertMatXls(xls):
             #     dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
             if(type(data.iloc[r,c])!=str):
                 if(len(str(data.iloc[r,c]).split("."))>=2):
-                    dfq+="K2022/" + str(c+1) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
+                    dfq+="K2022/" + str(charNum) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
                 else:
-                    dfq+="K2022/" + str(c+1) + " 0\n"
+                    dfq+="K2022/" + str(charNum) + " 0\n"
 
-        #Determine unit of measurement
-        for i in range (2,rc):
-            for j in range (0,cc):
-                if(str(data.iloc[r+1,c]) == "Strahl Winkel ["+chr(0x00b0)+"]"):
-                    r+=1
-                    dfq += "K2142/" + str(c+1) + " " + str(data.iloc[r+1,c]).append(chr(0x00b0)) + "\n"
-                elif (str(data.iloc[r+1,c]) =="Kappa"):
-                    r-=1
-                    dfq += "K2142/" + str(c+1) + " " + str(data.iloc[r+1,c]).append("[%") + "\n"
-                elif str(data.iloc[r+1,c]) == "Q1":
-                    r+=1
-                    dfq += "K2142/" + str(c+1) + " " + str(data.iloc[r+1,c]).append("[%") + "\n"
+            #Determine unit of measurement
+            for i in range (2,rc):
+                for j in range (0,cc):
+                    if(str(data.iloc[r+1,c]) == "Strahl Winkel ["+chr(0x00b0)+"]"):
+                        r+=1
+                        dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append(chr(0x00b0)) + "\n"
+                    elif (str(data.iloc[r+1,c]) =="Kappa"):
+                        r-=1
+                        dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append("[%") + "\n"
+                    elif str(data.iloc[r+1,c]) == "Q1":
+                        r+=1
+                        dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append("[%") + "\n"
+            charNum+=1
 
     #For loop to dump remain
     for i in range (2,rc):
