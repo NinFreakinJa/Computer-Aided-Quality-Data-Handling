@@ -5,9 +5,9 @@ import os
 
 
 def read_file(fileName):
-    try:
+    #try:
         #Determine Excel Type
-        xls = pd.ExcelFile(fileName)
+        xls = pd.ExcelFile("E:\\Users\\jreid\\Documents\\GitHub\\Computer-Aided-Quality-Data-Handling\\Sample Data\\Excel\\Matrix_SRE 4.0 - 0280158440-00.xls")
         numSheets = len(xls.sheet_names)
 
         if numSheets == 1:
@@ -15,9 +15,9 @@ def read_file(fileName):
             return convertNacXls(repo)
         else:
             proto = pd.read_excel(xls, 'Protokoll_Intern')
-            return proto.to_string()
-    except:
-        return ""
+            return convertMatXls(proto)
+    #except:
+        #return ""
 
 def convertNacXls(xls):   
     
@@ -58,12 +58,17 @@ def convertNacXls(xls):
             dfq += "K2002/" + str(c+1) + " " + str(data.iloc[r,c]) + "\n"
         
             #Determine decimal places
-            if c == 1:
-                dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
-            elif c == 4 or c == 23 or c == 24 or c== 27:
-                dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
-            else:
-                dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
+            # if c == 1:
+            #     dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
+            # elif c == 4 or c == 23 or c == 24 or c== 27:
+            #     dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
+            # else:
+            #     dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
+            if(type(data.iloc[r,c])!=str):
+                if(len(str(data.iloc[r,c]).split("."))>=2):
+                    dfq+="K2022/" + str(c+1) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
+                else:
+                    dfq+="K2022/" + str(c+1) + " 0\n"
 
         #Determine unit of measurement
             if(str(data.iloc[r+1,c])!="[-]"):
@@ -83,29 +88,29 @@ def convertMatXls(xls):
     
     #Split header and data into two dataframes
     header = xls.iloc[:12, :]
-    data = xls.iloc[12:,:]
+    data = xls.iloc[13:,:]
     
     #Create null test dataframe
     dfDimension = data.isna()
     
     #Count Rows
     rc = 0
-    while dfDimension.iloc[rc,0] == False:
+    while rc<dfDimension.shape[0] and dfDimension.iloc[rc,0] == False:
         rc+= 1 
     
     # Count Columns
-    cc = 0
-    while dfDimension.iloc[0,cc] == False  and dfDimension.iloc[2,cc] == False:
-        cc+= 1
+    cc = 26
+    # while dfDimension.iloc[0,cc] == False  and dfDimension.iloc[2,cc] == False:
+    #     cc+= 1
 
     #Define DFQ string
     dfq = ""
 
     #Add Defenite Header Info (Date/Time, Batch Name, # Characterisitics)
-    dfq += "K0004 " + str(header.iloc[3,3].strftime("%d.%m.%Y")) + "/" + str(header.iloc[4,3]) + "\n"
-    dfq += "K1001 " + str(header.iloc[3,4]) + "\n"
+    dfq += "K1115 " + str(header.iloc[1,2].strftime("%d.%m.%Y")) + "\n"
+    dfq += "K1001 " + str(header.iloc[2,2]) + "\n"
     dfq += "K0100 " + str(cc) + "\n"
-    dfq += "K1001/1 " + str(data.iloc[2,0]) +"\n"
+    dfq += "K1001/1 " + str(data.iloc[2,4]) +"\n"
     
 
     #Create loop to iterate df
@@ -118,12 +123,17 @@ def convertMatXls(xls):
             dfq += "K2002/" + str(c+1) + " " + str(data.iloc[r,c]) + "\n"
         
             #Determine decimal places
-            if c == 1:
-                dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
-            elif c == 4 or c == 23 or c == 24 or c== 27:
-                dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
-            else:
-                dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
+            # if c == 1:
+            #     dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
+            # elif c == 4 or c == 23 or c == 24 or c== 27:
+            #     dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
+            # else:
+            #     dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
+            if(type(data.iloc[r,c])!=str):
+                if(len(str(data.iloc[r,c]).split("."))>=2):
+                    dfq+="K2022/" + str(c+1) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
+                else:
+                    dfq+="K2022/" + str(c+1) + " 0\n"
 
         #Determine unit of measurement
         for i in range (2,rc):
@@ -141,10 +151,11 @@ def convertMatXls(xls):
     #For loop to dump remain
     for i in range (2,rc):
         for j in range (0,cc):
-            if j != cc-1:
-                dfq += str(data.iloc[i,j]) + chr(0x000f)
-            else: 
-                dfq += str(data.iloc[i,j]) + chr(0x000f) + "\n"  
+            if dfDimension.iloc[i,j]==False:
+                if j != cc-1:
+                    dfq += str(data.iloc[i,j]) + chr(0x000f)
+                else: 
+                    dfq += str(data.iloc[i,j]) + chr(0x000f) + "\n"  
     
     return dfq    
 
@@ -159,3 +170,7 @@ def processExcel(filepath,source_path,output_path,archive_path):
             os.fsync(file)
         shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
         print(threading.current_thread().name,"- Finished Processing "+filepath)
+
+
+if __name__ == "__main__":
+    print(read_file("E:\\Users\\jreid\\Documents\\GitHub\\Computer-Aided-Quality-Data-Handling\\Sample Data\\Excel\\Matrix_SRE 4.0 - 0280158440-00.xls"))
