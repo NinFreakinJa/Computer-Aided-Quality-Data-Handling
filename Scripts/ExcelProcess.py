@@ -5,7 +5,7 @@ import os
 
 
 def read_file(fileName):
-    #try:
+    try:
         #Determine Excel Type
         xls = pd.ExcelFile("E:\\Users\\jreid\\Documents\\GitHub\\Computer-Aided-Quality-Data-Handling\\Sample Data\\Excel\\Matrix_SRE 4.0 - 0280158440-00.xls")
         numSheets = len(xls.sheet_names)
@@ -16,8 +16,8 @@ def read_file(fileName):
         else:
             proto = pd.read_excel(xls, 'Protokoll_Intern')
             return convertMatXls(proto)
-    #except:
-        #return ""
+    except:
+        return ""
 
 def convertNacXls(xls):   
     
@@ -170,7 +170,3 @@ def processExcel(filepath,source_path,output_path,archive_path):
             os.fsync(file)
         shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
         print(threading.current_thread().name,"- Finished Processing "+filepath)
-
-
-if __name__ == "__main__":
-    print(read_file("E:\\Users\\jreid\\Documents\\GitHub\\Computer-Aided-Quality-Data-Handling\\Sample Data\\Excel\\Matrix_SRE 4.0 - 0280158440-00.xls"))
