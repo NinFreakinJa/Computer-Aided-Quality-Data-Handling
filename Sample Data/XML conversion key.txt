@@ -1,0 +1,44 @@
+This is a handmade coversion of HUP1.xml to .dfq
+//
+Header
+Stuff
+//
+k0001/1 no
+k2002/1 Current_Fault
+k0001/2 0x00B0
+k2002/2 MID
+k0001/3 CalFileNotFlashedForECUSW
+k2002/3 Name
+k0001/4 VAR
+k2002/4 Node
+k0001/5 Calibration file has not been flashed for ECU software
+k2002/5 Description
+k0001/6 11
+k2002/6 Type
+k0001/7 TransientFaultState
+k2002/7 Category
+k0001/8 14
+k2002/8 Occurrences
+k0001/9 11
+k2002/9 PCC_recent
+k0001/10 1
+k2002/10 PCC_first
+k2142/10 0
+k0001/11 Hours_of_Operation
+k2002/11 minutes
+k2142/11 0
+k0001/12 Power_on_Time
+k2002/12 milliseconds
+k0001/13 0x00000000
+k2002/13 Debug_0
+k0001/14 0x00000000
+k2002/14 Debug_1
+k0001/15 0x0000
+k2002/15 Speed
+k0001/16 0x00
+k2002/16 Status
+k0001/17 0x00
+k2002/17 UBVR
+k0001/18 0x00
+k2002/18 UBECU
+Dump remaining fault entries
