@@ -23,8 +23,9 @@ def convertNacXls(xls):
     
     #Split header and data into two dataframes
     header = xls.iloc[:10, :]
-    data = xls.iloc[10:,:]
-    
+    pulse = header.iloc[8:10, :]
+    data = xls.iloc[10:, :]
+
     #Create null test dataframe
     dfDimension = data.isna()
     
@@ -47,30 +48,31 @@ def convertNacXls(xls):
     dfq += "K0100 " + str(cc) + "\n"
     dfq += "K1001/1 " + str(data.iloc[2,0]) +"\n"
     
-
     #Create loop to iterate df
     for c in range (1,cc):
+
         #Determine characteristic name/value
         r = 0
+        rp = 0
         if dfDimension.iloc[r+2,c] == False:
             dfq += "K0001/" + str(c+1) + " " + str(data.iloc[r+2,c]) + "\n"
         
-            dfq += "K2002/" + str(c+1) + " " + str(data.iloc[r,c]) + "\n"
+            dfq += "K2002/" + str(c+1) + " " + str(data.iloc[r,c]) 
+            
+            #Append Qdyn pulse width/period information
+            if str(data.iloc[r,c]) == "Qdyn":
+                dfq += " " + str(pulse.iloc[rp,0]) + " of " + str(pulse.iloc[rp,c]) + " @ " + str(pulse.iloc[rp+1,0]) + " of " + str(pulse.iloc[rp+1,c])
+
+            dfq += "\n"
         
-            #Determine decimal places
-            # if c == 1:
-            #     dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
-            # elif c == 4 or c == 23 or c == 24 or c== 27:
-            #     dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
-            # else:
-            #     dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
+            #Determine decimal places 
             if(type(data.iloc[r,c])!=str):
                 if(len(str(data.iloc[r,c]).split("."))>=2):
                     dfq+="K2022/" + str(c+1) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
                 else:
                     dfq+="K2022/" + str(c+1) + " 0\n"
 
-        #Determine unit of measurement
+            #Determine unit of measurement
             if(str(data.iloc[r+1,c])!="[-]"):
                 dfq += "K2142/" + str(c+1) + " " + str(data.iloc[r+1,c]).strip("[]") + "\n"
 
@@ -80,8 +82,9 @@ def convertNacXls(xls):
             if j != cc-1:
                 dfq += str(data.iloc[i,j]) + chr(0x000f)
             else: 
-                dfq += str(data.iloc[i,j]) + chr(0x000f) + "\n"  
+                dfq += str(data.iloc[i,j]) + "\n"  
     
+    #Return DFQ
     return dfq    
       
 def convertMatXls(xls):   
