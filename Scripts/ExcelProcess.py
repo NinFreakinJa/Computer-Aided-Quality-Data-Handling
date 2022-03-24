@@ -59,8 +59,8 @@ def convertNacXls(xls):
         
             dfq += "K2002/" + str(c+1) + " " + str(data.iloc[r,c]) 
             
-            #Append Qdyn pulse width/period information
-            if str(data.iloc[r,c]) == "Qdyn":
+            #Append Qdyn/Qstat pulse width/period information
+            if str(data.iloc[r,c]) == "Qdyn" or str(data.iloc[r,c]) == "Qstat" :
                 dfq += " " + str(pulse.iloc[rp,0]) + " of " + str(pulse.iloc[rp,c]) + " @ " + str(pulse.iloc[rp+1,0]) + " of " + str(pulse.iloc[rp+1,c])
 
             dfq += "\n"
@@ -174,3 +174,4 @@ def processExcel(filepath,source_path,output_path,archive_path):
             os.fsync(file)
         shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
         print(threading.current_thread().name,"- Finished Processing "+filepath)
+        
