@@ -64,10 +64,12 @@ def conversion(conversion):
     # Current string conversion
     conversion[2]=""
     # Different part id locations in different formats
+    alternateType=False
     if("PartId" in conversion[0]["Head #Index"].keys()):
         conversion[2]=conversion[2]+"K1001 "+conversion[0]["Head #Index"]["PartId"]["Data"]+"\n"+"K0004 "+conversion[0]["Date"]+"\n"
     else:
         conversion[2]=conversion[2]+"K1001 "+conversion[0]["MesUniqueID"]["Data"]+"\n"+"K0004 "+conversion[0]["Date"]+"\n"
+        alternateType=True
     # Characteristic count
     conversion[1]=0
     # Dumped values
@@ -78,43 +80,47 @@ def conversion(conversion):
     conversion[5]=""
     # Alternate values for characteristics
     conversion[6]=OrderedDict()
-    # Reading in the head
-    for i in conversion[0]["Head #Index"]:
-       # Checks for data fields that are not null
-       if(i!="PartId" and "Data" in conversion[0]["Head #Index"][i].keys() and "Properties" in conversion[0]["Head #Index"][i].keys() and conversion[0]["Head #Index"][i]["Data"]!=""):
-            conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Properties"]["Label_E"]+"\n"
-            # Adds the number of decimal points for value
-            if(len(conversion[0]["Head #Index"][i]["Data"].split("."))>=2):
-                conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(conversion[0]["Head #Index"][i]["Data"].split(".")[1]))+"\n"
-            else:
-                conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
-            conversion[4]+=conversion[0]["Head #Index"][i]["Data"]+chr(0x000f)
-            conversion[1]+=1
-    # Calls recursive helper method for the rest of the file
-    conversion=conversion_helper(conversion,conversion[0],True)
-    # Adds line stating number of characteristics
-    conversion[2]="K0100 "+str(conversion[1])+"\n"+conversion[2]
-    # Adds alternate values for characteristics
-    split=conversion[2].split("\n")
-    for i in conversion[6]:
-        for j in conversion[6][i].keys():
-            # Only entered if values are different
-            if(type(conversion[6][i][j])==list and len(set(conversion[6][i][j]))>1):
-                for k in range(len(split)):
-                    if(j+"/"+str(conversion[6][i]["CharNum"]) in split[k]):
-                        split[k]=j+"/"+str(conversion[6][i]["CharNum"])+" "
-                        for l in conversion[6][i][j]:
-                            split[k]+=str(l)+"/"
-                        break
-    conversion[2]="\n".join(split)
-    # Adds dump to file
-    if(conversion[3]!=""):
-        dumpCopy=conversion[3].split("\n")
-        conversion[3]=""
-        for i in dumpCopy:
-            if(i!=""):
-                conversion[3]+=conversion[4]+i+conversion[5]+"\n"
-        conversion[2]+=conversion[3]
+    if(not alternateType):
+        # Reading in the head
+        for i in conversion[0]["Head #Index"]:
+            # Checks for data fields that are not null
+            if(i!="PartId" and "Data" in conversion[0]["Head #Index"][i].keys() and "Properties" in conversion[0]["Head #Index"][i].keys() and conversion[0]["Head #Index"][i]["Data"]!=""):
+                conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+conversion[0]["Head #Index"][i]["Properties"]["Label_E"]+"\n"
+                # Adds the number of decimal points for value
+                if(len(conversion[0]["Head #Index"][i]["Data"].split("."))>=2):
+                    conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(conversion[0]["Head #Index"][i]["Data"].split(".")[1]))+"\n"
+                else:
+                    conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
+                conversion[4]+=conversion[0]["Head #Index"][i]["Data"]+chr(0x000f)
+                conversion[1]+=1
+        # Calls recursive helper method for the rest of the file
+        conversion=conversion_helper(conversion,conversion[0],True)
+        # Adds line stating number of characteristics
+        conversion[2]="K0100 "+str(conversion[1])+"\n"+conversion[2]
+        # Adds alternate values for characteristics
+        split=conversion[2].split("\n")
+        for i in conversion[6]:
+            for j in conversion[6][i].keys():
+                # Only entered if values are different
+                if(type(conversion[6][i][j])==list and len(set(conversion[6][i][j]))>1):
+                    for k in range(len(split)):
+                        if(j+"/"+str(conversion[6][i]["CharNum"]) in split[k]):
+                            split[k]=j+"/"+str(conversion[6][i]["CharNum"])+" "
+                            for l in conversion[6][i][j]:
+                                split[k]+=str(l)+"/"
+                            break
+        conversion[2]="\n".join(split)
+        # Adds dump to file
+        if(conversion[3]!=""):
+            dumpCopy=conversion[3].split("\n")
+            conversion[3]=""
+            for i in dumpCopy:
+                if(i!=""):
+                    conversion[3]+=conversion[4]+i+conversion[5]+"\n"
+            conversion[2]+=conversion[3]
+    else:
+        conversion=conversion_helper_alt(conversion,conversion[0],"")
+        conversion[2]="K0100 "+str(conversion[1])+"\n"+conversion[2]
     return conversion
 
 # Recursive helper method for reading characteristics
@@ -146,7 +152,7 @@ def conversion_helper(conversion,current,copy):
                             conversion[6][i.replace(" #Index","")]=OrderedDict()
                             conversion[6][i.replace(" #Index","")]["CharNum"]=conversion[1]
                         # Number of decimal points
-                        if(len(current[i]["Value"]["Data"].split("."))>=2):
+                        if(len(current[i]["Value"]["Data"].split("."))==2):
                             conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(current[i]["Value"]["Data"].split(".")[1]))+"\n"
                             if(not copy):
                                 conversion[6][i.replace(" #Index","")]["K2022"]=[len(current[i]["Value"]["Data"].split(".")[1])]
@@ -169,6 +175,53 @@ def conversion_helper(conversion,current,copy):
                                 conversion[6][i.replace(" #Index","")]["K2142"]=[current[i]["Unit"]["Data"]]
                         conversion[1]+=1
     return conversion
+
+def conversion_helper_alt(conversion, current, header):
+    for i in current:
+        if(i!="MesUniqueID"):
+            #Determines if key is another dict to go deeper in recursion
+            if(type(current[i])==OrderedDict):
+                if("SetValue" in current[i].keys()):
+                    conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+current[i]["SetValue"]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+header+current[i]["Properties"]["Label_E"]+"\n"
+                    # Number of decimal points
+                    if(len(current[i]["SetValue"]["Data"].split("."))==2):
+                        conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(current[i]["SetValue"]["Data"].split(".")[1]))+"\n"
+                    else:
+                        conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
+                    # Lower limit, upper limit, and unit values
+                    if("LoLim" in current[i].keys() and current[i]["LoLim"]["Data"]!=""):
+                        conversion[2]=conversion[2]+"K2110/"+str(conversion[1])+" "+current[i]["LoLim"]["Data"]+"\n"
+                    if("UpLim" in current[i].keys() and current[i]["UpLim"]["Data"]!=""):
+                        conversion[2]=conversion[2]+"K2111/"+str(conversion[1])+" "+current[i]["UpLim"]["Data"]+"\n"
+                    if("Label2_E" in current[i]["SetValue"]["Properties"].keys()):
+                        if(current[i]["SetValue"]["Properties"]["Label2_E"]==""):
+                            conversion[2]=conversion[2]+"K2142/"+str(conversion[1])+" "+current[i]["SetValue"]["Properties"]["Label2_D"]+"\n"
+                        else:
+                            conversion[2]=conversion[2]+"K2142/"+str(conversion[1])+" "+current[i]["SetValue"]["Properties"]["Label2_E"]+"\n"
+                    conversion[1]+=1                
+                else:
+                    if("#Index" in i):
+                        if("Properties" in current[i].keys()):
+                            conversion=conversion_helper_alt(conversion,current[i],header+current[i]["Properties"]["Label_E"]+"_")
+                        else:
+                            conversion=conversion_helper_alt(conversion,current[i],header+i.replace(" #Index","")+"_")
+                    else:
+                        conversion=conversion_helper_alt(conversion,current[i],header)
+                    if("Properties" in current[i].keys() and "Data" in current[i].keys() and "Label_E" in current[i]["Properties"].keys()):
+                        conversion[2]=conversion[2]+"K0001/"+str(conversion[1])+" "+current[i]["Data"]+"\n"+"K2002/"+str(conversion[1])+" "+header+current[i]["Properties"]["Label_E"]+"\n"
+                        # Number of decimal points
+                        if(len(current[i]["Data"].split("."))==2):
+                            conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" "+str(len(current[i]["Data"].split(".")[1]))+"\n"
+                        else:
+                            conversion[2]=conversion[2]+"K2022/"+str(conversion[1])+" 0\n"
+                        if("Label2_E" in current[i]["Properties"].keys()):
+                            if(current[i]["Properties"]["Label2_E"]==""):
+                                conversion[2]=conversion[2]+"K2142/"+str(conversion[1])+" "+current[i]["Properties"]["Label2_D"]+"\n"
+                            else:
+                                conversion[2]=conversion[2]+"K2142/"+str(conversion[1])+" "+current[i]["Properties"]["Label2_E"]+"\n"
+                        conversion[1]+=1
+    return conversion
+                
 
 # Recursive helper method for dumping values
 def dump(conversion, current):
