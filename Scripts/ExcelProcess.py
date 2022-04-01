@@ -120,23 +120,24 @@ def convertMatXls(xls):
     for c in range (1,cc):
         #Determine characteristic name/value
         r = 0
+        c = 0
         if dfDimension.iloc[r+2,c] == False:
             dfq += "K0001/" + str(charNum) + " " + str(data.iloc[r+2,c]) + "\n"
         
-            dfq += "K2002/" + str(charNum) + " " + str(data.iloc[r,c]) + "\n"
+            dfq += "K2002/" + str(charNum) + " " + str(data.iloc[r,c+3]) + "\n"
         
             #Determine decimal places
-            # if c == 1:
-            #     dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
-            # elif c == 4 or c == 23 or c == 24 or c== 27:
-            #     dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
-            # else:
-            #     dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
-            if(type(data.iloc[r,c])!=str):
-                if(len(str(data.iloc[r,c]).split("."))>=2):
-                    dfq+="K2022/" + str(charNum) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
-                else:
-                    dfq+="K2022/" + str(charNum) + " 0\n"
+            if c == 1:
+                dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
+            elif c == 4 or c == 23 or c == 24 or c== 27:
+                 dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
+            else:
+                dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
+            #if(type(data.iloc[r,c])!=str):
+               # if(len(str(data.iloc[r,c]).split("."))>=2):
+                 #   dfq+="K2022/" + str(charNum) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
+               # else:
+                  #  dfq+="K2022/" + str(charNum) + " 0\n"
 
             #Determine unit of measurement
             for i in range (2,rc):
@@ -162,6 +163,7 @@ def convertMatXls(xls):
                     dfq += str(data.iloc[i,j]) + chr(0x000f) + "\n"  
     
     return dfq    
+
 
 
 def processExcel(filepath,source_path,output_path,archive_path):
