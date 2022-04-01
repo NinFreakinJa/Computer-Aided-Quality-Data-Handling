@@ -1,6 +1,5 @@
 import threading
 import shutil
-import pprint
 from collections import OrderedDict
 import os
 
@@ -261,7 +260,6 @@ def processDAT(filepath,source_path,output_path,archive_path):
             os.fsync(file)
         # Writes new dfq file in appropriate location
         with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".dat",".dfq"),"wt") as file:
-            #pprint.pprint(read_file(filepath), stream=file)
             # Calls the conversion method with the dict returned by the read_file method
             file.write(conversion([read_file(filepath),1,"","","","",OrderedDict()])[2])
             os.fsync(file)
