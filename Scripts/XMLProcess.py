@@ -120,6 +120,9 @@ def dump(conversion,current):
 def processXML(filepath,source_path,output_path,archive_path):
     if(os.path.exists(filepath)):
         print(threading.current_thread().name,"- Processing "+filepath)
+        # Ensures all filewriting to file is complete
+        with open(filepath, 'r+') as file:
+            os.fsync(file)
         with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".xml",".dfq"),"wt") as file:
             file.write(conversion([read_file(filepath),1,"","",""])[2])
             os.fsync(file)
