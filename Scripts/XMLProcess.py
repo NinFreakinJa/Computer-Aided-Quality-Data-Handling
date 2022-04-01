@@ -32,28 +32,85 @@ def format_date(date,time):
         timeSplit[0]="0"+timeSplit[0]
     return date+"/"+":".join(timeSplit)
 
-def conversion():
+def conversion(conversion):
     # Current string conversion
     conversion[2]=""
     conversion[2]+="K0004 "+format_date(conversion[0]["Output_Of_Fault_Code_Memory"]["Date"],conversion[0]["Output_Of_Fault_Code_Memory"]["Time"])+"\n"
     # Characteristic count
-    conversion[1]=0
+    conversion[1]=1
     # Dumped values
     conversion[3]=""
     # Head values for dump
     conversion[4]=""
-    # Tail values for dump
-    conversion[5]=""
-    # Alternate values for characteristics
-    conversion[6]=OrderedDict()
-
+    conversion_helper(conversion,conversion[0]["Output_Of_Fault_Code_Memory"],False,"")
+    # Adds line stating number of characteristics
+    conversion[2]="K0100 "+str(conversion[1]-1)+"\n"+conversion[2]
+    # Adds dump to file
+    if(conversion[3]!=""):
+        dumpCopy=conversion[3].split("\n")
+        conversion[3]=""
+        for i in dumpCopy:
+            if(i!=""):
+                conversion[3]+=conversion[4]+i+"\n"
+        conversion[2]+=conversion[3]
     return conversion
+
+def conversion_helper(conversion, current, copy,header):
+    for i in current:
+        if(i!="Date" and i!="Time"):
+            if(type(current[i])==OrderedDict):
+                if(i=="FaultEntry" and copy):
+                    conversion=dump(conversion,current[i])
+                    conversion[3]+="\n"
+                else:
+                    if(i=="FaultEntry" or copy):
+                        conversion=conversion_helper(conversion,current[i],True, header+i+"_")
+                    else:
+                        conversion=conversion_helper(conversion,current[i],False, header+i+"_")
+            elif(type(current[i])==list):
+                for j in range(len(current[i])):
+                    if(i=="FaultEntry" and j>0):
+                        conversion=dump(conversion,current[i][j])
+                        conversion[3]+="\n"
+                    elif(type(current[i][j])==OrderedDict):
+                        if("Name" in current[i][j].keys() and "Value" in current[i][j].keys()):
+                            conversion[2]+="K0001/"+str(conversion[1])+" "+str(current[i][j]["Value"])+"\nK2002/"+str(conversion[1])+" "+header+i+"_"+str(current[i][j]["Name"])+"\n"
+                            conversion[1]+=1
+                        else:
+                            if(i=="FaultEntry" or copy):
+                                conversion=conversion_helper(conversion,current[i][j],True, header+i+"_")
+                            else:
+                                conversion=conversion_helper(conversion,current[i][j],False, header+i+"_")
+            elif(current[i]!="" and current[i]!=None):
+                conversion[2]+="K0001/"+str(conversion[1])+" "+str(current[i])+"\nK2002/"+str(conversion[1])+" "+header+i+"\n"
+                if(not copy):
+                    conversion[4]+=str(current[i])+chr(0x000f)
+                if(i=="Hours" or i=="Minutes" or i=="Seconds" or i=="Milliseconds"):
+                    conversion[2]+="K2142/"+str(conversion[1])+" "+i+"\n"
+                conversion[1]+=1
+    return conversion
+
+def dump(conversion,current):
+    for i in current:
+        if(type(current[i])==OrderedDict):
+            conversion=dump(conversion,current[i])
+        elif(type(current[i])==list):
+            for j in range(len(current[i])):
+                if(type(current[i][j])==OrderedDict and "Name" in current[i][j].keys() and "Value" in current[i][j].keys()):
+                    conversion[3]+=str(current[i][j]["Value"])+chr(0x000f)
+                else:
+                    conversion=dump(conversion,current[i][j])
+        elif(current[i]!=""):
+            conversion[3]+=current[i]+chr(0x000f)
+    return conversion
+
 
 def processXML(filepath,source_path,output_path,archive_path):
     if(os.path.exists(filepath)):
         print(threading.current_thread().name,"- Processing "+filepath)
-        with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".xml",".txt"),"wt") as file:
-            pprint.pprint(read_file(filepath), stream=file)
+        with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".xml",".dfq"),"wt") as file:
+            # pprint.pprint(read_file(filepath), stream=file)
+            file.write(conversion([read_file(filepath),1,"","",""])[2])
             os.fsync(file)
         shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
         print(threading.current_thread().name,"- Finished Processing "+filepath)

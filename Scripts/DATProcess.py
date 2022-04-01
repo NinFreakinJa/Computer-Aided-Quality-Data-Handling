@@ -71,7 +71,7 @@ def conversion(conversion):
         conversion[2]=conversion[2]+"K1001 "+conversion[0]["MesUniqueID"]["Data"]+"\n"+"K0004 "+conversion[0]["Date"]+"\n"
         alternateType=True
     # Characteristic count
-    conversion[1]=0
+    conversion[1]=1
     # Dumped values
     conversion[3]=""
     # Head values for dump
@@ -96,7 +96,7 @@ def conversion(conversion):
         # Calls recursive helper method for the rest of the file
         conversion=conversion_helper(conversion,conversion[0],True)
         # Adds line stating number of characteristics
-        conversion[2]="K0100 "+str(conversion[1])+"\n"+conversion[2]
+        conversion[2]="K0100 "+str(conversion[1]-1)+"\n"+conversion[2]
         # Adds alternate values for characteristics
         split=conversion[2].split("\n")
         for i in conversion[6]:
@@ -120,7 +120,7 @@ def conversion(conversion):
             conversion[2]+=conversion[3]
     else:
         conversion=conversion_helper_alt(conversion,conversion[0],"")
-        conversion[2]="K0100 "+str(conversion[1])+"\n"+conversion[2]
+        conversion[2]="K0100 "+str(conversion[1]-1)+"\n"+conversion[2]
     return conversion
 
 # Recursive helper method for reading characteristics
@@ -263,7 +263,7 @@ def processDAT(filepath,source_path,output_path,archive_path):
         with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".dat",".dfq"),"wt") as file:
             #pprint.pprint(read_file(filepath), stream=file)
             # Calls the conversion method with the dict returned by the read_file method
-            file.write(conversion([read_file(filepath),0,"","","","",OrderedDict()])[2])
+            file.write(conversion([read_file(filepath),1,"","","","",OrderedDict()])[2])
             os.fsync(file)
         # Moves original file to archive location
         shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
