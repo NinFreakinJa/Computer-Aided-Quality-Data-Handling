@@ -15,6 +15,8 @@ def read_file(fileName):
             return convertNacXls(repo)
         else:
             proto = pd.read_excel(xls, 'Protokoll_Intern')
+            proto.dropna(how='all', axis=1, inplace=True)
+            proto.dropna(how='all', axis=0, inplace=True)
             return convertMatXls(proto)
     except:
         return ""
@@ -90,73 +92,95 @@ def convertNacXls(xls):
 def convertMatXls(xls):   
     
     #Split header and data into two dataframes
-    header = xls.iloc[:12, :]
-    data = xls.iloc[13:,:]
-    
+    header = xls.iloc[:11, :]
+    data = xls.iloc[11:,:]
+    header=header.dropna(how='all', axis=1).copy()
+    header=header.dropna(how='all', axis=0).copy()
+    data =data.dropna(how='all', axis=1).copy()
+    data =data.dropna(how='all', axis=0).copy()
     #Create null test dataframe
     dfDimension = data.isna()
-    
+    #Create null test dataframe
+    dfDimension = data.isna()
+    headDimension = header.isna()
     #Count Rows
     rc = 0
     while rc<dfDimension.shape[0] and dfDimension.iloc[rc,0] == False:
         rc+= 1 
     
     # Count Columns
-    cc = 26
-    # while dfDimension.iloc[0,cc] == False  and dfDimension.iloc[2,cc] == False:
-    #     cc+= 1
-
+    cc = 0
+    while cc<dfDimension.shape[1] and dfDimension.iloc[0,cc] == False:
+        cc+= 1
     #Define DFQ string
     dfq = ""
 
     #Add Defenite Header Info (Date/Time, Batch Name, # Characterisitics)
-    dfq += "K1115 " + str(header.iloc[1,2].strftime("%d.%m.%Y")) + "\n"
-    dfq += "K1001 " + str(header.iloc[2,2]) + "\n"
+    dfq += "K1115 " + str(header.iloc[0,2].strftime("%d.%m.%Y")) + "\n"
+    dfq += "K1001 " + str(header.iloc[1,2]) + "\n"
     dfq += "K0100 " + str(cc) + "\n"
-    dfq += "K1001/1 " + str(data.iloc[2,4]) +"\n"
+    #dfq += "K1001/1 " + str(data.iloc[2,4]) +"\n"
     
     charNum=1
+    titleC=0
     #Create loop to iterate df
-    for c in range (1,cc):
+    for c in range (0,cc):
         #Determine characteristic name/value
         r = 0
-        c = 0
-        if dfDimension.iloc[r+2,c] == False:
-            dfq += "K0001/" + str(charNum) + " " + str(data.iloc[r+2,c]) + "\n"
-        
-            dfq += "K2002/" + str(charNum) + " " + str(data.iloc[r,c+3]) + "\n"
+        if dfDimension.iloc[r,c] == False:
+            dfq += "K0001/" + str(charNum) + " " + str(data.iloc[r,c]) + "\n"
+
+            while(headDimension.iloc[-1,titleC] and headDimension.iloc[-2,titleC]):
+                titleC+=1
+            if(not headDimension.iloc[-1,titleC]):
+                dfq += "K2002/" + str(charNum) + " " + str(header.iloc[-1,titleC]).replace("\n"," ") + "\n"
+            else:
+                titleCC=titleC
+                while titleCC>=0:
+                    if(not headDimension.iloc[-2,titleCC]):
+                        dfq += "K2002/" + str(charNum) + " " + str(header.iloc[-2,titleCC]).replace("\n"," ") + "\n"
+                        break
+                    else:
+                        titleCC-=1
         
             #Determine decimal places
-            if c == 1:
-                dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
-            elif c == 4 or c == 23 or c == 24 or c== 27:
-                 dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
-            else:
-                dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
-            #if(type(data.iloc[r,c])!=str):
-               # if(len(str(data.iloc[r,c]).split("."))>=2):
-                 #   dfq+="K2022/" + str(charNum) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
-               # else:
-                  #  dfq+="K2022/" + str(charNum) + " 0\n"
+            # if c == 1:
+            #     dfq += "K2022/" + str(c+1) + " " + str(0) + "\n"
+            # elif c == 4 or c == 23 or c == 24 or c== 27:
+            #      dfq += "K2022/" + str(c+1) + " " + str(2) + "\n" 
+            # else:
+            #     dfq += "K2022/" + str(c+1) + " " + str(3) + "\n" 
+            if(type(data.iloc[r,c])!=str):
+               if(len(str(data.iloc[r,c]).split("."))>=2):
+                   dfq+="K2022/" + str(charNum) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
+               else:
+                   dfq+="K2022/" + str(charNum) + " 0\n"
 
             #Determine unit of measurement
-            for i in range (2,rc):
-                for j in range (0,cc):
-                    if(str(data.iloc[r+1,c]) == "Strahl Winkel ["+chr(0x00b0)+"]"):
-                        r+=1
-                        dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append(chr(0x00b0)) + "\n"
-                    elif (str(data.iloc[r+1,c]) =="Kappa"):
-                        r-=1
-                        dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append("[%") + "\n"
-                    elif str(data.iloc[r+1,c]) == "Q1":
-                        r+=1
-                        dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append("[%") + "\n"
+            # for i in range (0,rc):
+            #     for j in range (0,cc):
+            #         if(str(data.iloc[r+1,c]) == "Strahl Winkel ["+chr(0x00b0)+"]"):
+            #             r+=1
+            #             dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append(chr(0x00b0)) + "\n"
+            #         elif (str(data.iloc[r+1,c]) =="Kappa"):
+            #             r-=1
+            #             dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append("[%") + "\n"
+            #         elif str(data.iloc[r+1,c]) == "Q1":
+            #             r+=1
+            #             dfq += "K2142/" + str(charNum) + " " + str(data.iloc[r+1,c]).append("[%") + "\n"
+
+            for i in range(titleC,0,-1):
+                if(not headDimension.iloc[-2,i]):
+                    if("[" in header.iloc[-2,i]):
+                        dfq += "K2142/" + str(charNum) + " " + str(header.iloc[-2,i])[str(header.iloc[-2,i]).find("[")+1:str(header.iloc[-2,i]).find("]")] + "\n"
+                    break
             charNum+=1
+            titleC+=1
 
     #For loop to dump remain
-    for i in range (2,rc):
+    for i in range (1,rc):
         for j in range (0,cc):
-            if dfDimension.iloc[i,j]==False:
+            if not dfDimension.iloc[i,j]:
                 if j != cc-1:
                     dfq += str(data.iloc[i,j]) + chr(0x000f)
                 else: 
