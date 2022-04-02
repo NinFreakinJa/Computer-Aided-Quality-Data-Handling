@@ -13,7 +13,7 @@ pathsConfig.json is in the format of a list containing sets of input, output, ar
 > &nbsp;&nbsp;&nbsp;&nbsp;],\
 > &nbsp;&nbsp;&nbsp;&nbsp;"output_path" : "..\\PathToOutputDirectory",\
 > &nbsp;&nbsp;&nbsp;&nbsp;"archive_path": "..\\PathToArchiveDirectory"\
-> }\
+> }
 ##### Input Paths
 The input_paths characteristic is a comma-separated list of directory paths for the program to watch and pull files for conversion.
 ##### Output Paths
