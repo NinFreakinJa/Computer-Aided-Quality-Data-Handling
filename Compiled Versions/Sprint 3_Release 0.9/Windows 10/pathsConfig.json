@@ -1,0 +1,19 @@
+{
+    "paths": [    
+        {
+            "input_paths": [
+                "..\\..\\..\\Input_1_1",
+                "..\\..\\..\\Input_1_2"
+            ],
+            "output_path" : "..\\..\\..\\Output",
+            "archive_path": "..\\..\\..\\Archive"
+        },
+        {
+            "input_paths": [
+                "..\\..\\..\\Input_2_1"
+            ],
+            "output_path" : "..\\..\\..\\Output2",
+            "archive_path": "..\\..\\..\\Archive2"
+        }
+    ]
+}
