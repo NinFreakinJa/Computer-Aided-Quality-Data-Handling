@@ -45,10 +45,10 @@ def convertNacXls(xls):
     dfq = ""
 
     #Add Defenite Header Info (Date/Time, Batch Name, # Characterisitics)
+    dfq += "K0100 " + str(cc) + "\n"
     dfq += "K0004 " + str(header.iloc[1,10].strftime("%d.%m.%Y")) + "/" + str(header.iloc[1,13]) + "\n"
     dfq += "K0006 " + str(header.iloc[1,1]) + "\n"
-    dfq += "K0100 " + str(cc) + "\n"
-    dfq += "K1001/1 " + str(data.iloc[2,0]) +"\n"
+    dfq += "K1001 " + str(data.iloc[2,0]) +"\n"
     
     #Create loop to iterate df
     for c in range (1,cc):
@@ -116,9 +116,9 @@ def convertMatXls(xls):
     dfq = ""
 
     #Add Defenite Header Info (Date/Time, Batch Name, # Characterisitics)
+    dfq += "K0100 " + str(cc) + "\n"
     dfq += "K1115 " + str(header.iloc[0,2].strftime("%d.%m.%Y")) + "\n"
     dfq += "K1001 " + str(header.iloc[1,2]) + "\n"
-    dfq += "K0100 " + str(cc) + "\n"
     
     charNum=1
     titleC=0
