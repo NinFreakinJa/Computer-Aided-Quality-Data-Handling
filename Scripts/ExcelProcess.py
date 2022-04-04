@@ -19,7 +19,7 @@ def read_file(fileName):
             proto.dropna(how='all', axis=0, inplace=True)
             return convertMatXls(proto)
     except:
-        return ""
+        return "Error converting file"
 
 def convertNacXls(xls):   
     
@@ -48,7 +48,7 @@ def convertNacXls(xls):
     dfq += "K0100 " + str(cc) + "\n"
     dfq += "K0004 " + str(header.iloc[1,10].strftime("%d.%m.%Y")) + "/" + str(header.iloc[1,13]) + "\n"
     dfq += "K0006 " + str(header.iloc[1,1]) + "\n"
-    dfq += "K1001 " + str(data.iloc[2,0]) +"\n"
+    dfq += "K1001/1 " + str(data.iloc[2,0]) +"\n"
     
     #Create loop to iterate df
     for c in range (1,cc):

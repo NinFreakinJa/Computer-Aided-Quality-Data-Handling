@@ -124,7 +124,10 @@ def processXML(filepath,source_path,output_path,archive_path):
         with open(filepath, 'r+') as file:
             os.fsync(file)
         with open(output_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,"").replace(".xml",".dfq"),"wt") as file:
-            file.write(conversion([read_file(filepath),1,"","",""])[2])
+            try:
+                file.write(conversion([read_file(filepath),1,"","",""])[2])
+            except:
+                file.write("Error converting file")
             os.fsync(file)
         shutil.move(filepath,archive_path+"\\"+source_path.split("\\")[-1]+filepath.replace(source_path,""))
         print(threading.current_thread().name,"- Finished Processing "+filepath)

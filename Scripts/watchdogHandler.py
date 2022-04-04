@@ -37,7 +37,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
             elif(extension=="xls" or extension=="xlsx"):
                 ExcelProcess.processExcel(event.src_path,self.source_path,self.output_path,self.archive_path)
             else:
-                print(threading.current_thread().name,"- File type not supported")
+                print(threading.current_thread().name,"- File type "+extension+" not supported")
 
 # Initiallization for watchdog
 def startWatchdog(source_path,output_path,archive_path):
