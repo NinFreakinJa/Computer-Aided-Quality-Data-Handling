@@ -56,7 +56,7 @@ def convertNacXls(xls):
         r = 0
         rp = 0
         if dfDimension.iloc[r+2,c] == False:
-            dfq += "K0001/" + str(c+1) + " " + str(data.iloc[r+2,c]) + "\n"
+            ##dfq += "K0001/" + str(c+1) + " " + str(data.iloc[r+2,c]) + "\n"
         
             dfq += "K2002/" + str(c+1) + " " + str(data.iloc[r,c]) 
             
