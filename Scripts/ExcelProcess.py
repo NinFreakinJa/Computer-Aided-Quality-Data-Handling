@@ -25,8 +25,8 @@ def convertNacXls(xls):
     
     #Split header and data into two dataframes
     header = xls.iloc[:10, :]
-    pulse = header.iloc[8:10, :]
-    data = xls.iloc[10:, :]
+    pulse = header.iloc[8:10, 2:]
+    data = xls.iloc[10:, 2:]
 
     #Create null test dataframe
     dfDimension = data.isna()
@@ -47,11 +47,10 @@ def convertNacXls(xls):
     #Add Defenite Header Info (Date/Time, Batch Name, # Characterisitics)
     dfq += "K0100 " + str(cc) + "\n"
     dfq += "K0004 " + str(header.iloc[1,10].strftime("%d.%m.%Y")) + "/" + str(header.iloc[1,13]) + "\n"
-    dfq += "K0006 " + str(header.iloc[1,1]) + "\n"
-    dfq += "K1001/1 " + str(data.iloc[2,0]) +"\n"
+    dfq += "K1001 " + str(header.iloc[1,1]) +"\n"
     
     #Create loop to iterate df
-    for c in range (1,cc):
+    for c in range (0,cc):
 
         #Determine characteristic name/value
         r = 0
@@ -63,7 +62,7 @@ def convertNacXls(xls):
             
             #Append Qdyn/Qstat pulse width/period information
             if str(data.iloc[r,c]) == "Qdyn" or str(data.iloc[r,c]) == "Qstat" :
-                dfq += " " + str(pulse.iloc[rp,0]) + " of " + str(pulse.iloc[rp,c]) + " @ " + str(pulse.iloc[rp+1,0]) + " of " + str(pulse.iloc[rp+1,c])
+                dfq += " Pulse width of " + str(pulse.iloc[rp,c]) + " @ Pulse Period of " + str(pulse.iloc[rp+1,c])
 
             dfq += "\n"
         
@@ -79,7 +78,7 @@ def convertNacXls(xls):
                 dfq += "K2142/" + str(c+1) + " " + str(data.iloc[r+1,c]).strip("[]") + "\n"
 
     #For loop to dump remain
-    for i in range (3,rc):
+    for i in range (2,rc):
         for j in range (0,cc):
             if j != cc-1:
                 dfq += str(data.iloc[i,j]) + chr(0x000f)
