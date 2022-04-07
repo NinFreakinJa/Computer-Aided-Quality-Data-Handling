@@ -68,9 +68,9 @@ def convertNacXls(xls):
             dfq += "\n"
         
             #Determine decimal places 
-            if(type(data.iloc[r,c])!=str):
-                if(len(str(data.iloc[r,c]).split("."))>=2):
-                    dfq+="K2022/" + str(c+1) + " " + str(len(str(data.iloc[r,c]).split(".")[1])) + "\n" 
+            if(type(data.iloc[r+2,c])!=str):
+                if(len(str(data.iloc[r+2,c]).split("."))>=2):
+                    dfq+="K2022/" + str(c+1) + " " + str(len(str(data.iloc[r+2,c]).split(".")[1])) + "\n" 
                 else:
                     dfq+="K2022/" + str(c+1) + " 0\n"
 
@@ -79,7 +79,7 @@ def convertNacXls(xls):
                 dfq += "K2142/" + str(c+1) + " " + str(data.iloc[r+1,c]).strip("[]") + "\n"
 
     #For loop to dump remain
-    for i in range (2,rc):
+    for i in range (3,rc):
         for j in range (0,cc):
             if j != cc-1:
                 dfq += str(data.iloc[i,j]) + chr(0x000f)
